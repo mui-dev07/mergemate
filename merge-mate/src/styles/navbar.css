@@ -1,0 +1,12 @@
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-outline-light:hover {
+  background: linear-gradient(45deg, #6cc644, #4078c0);
+  border-color: transparent;
+}

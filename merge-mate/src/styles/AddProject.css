@@ -1,0 +1,104 @@
+.add-project-container {
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+}
+
+.add-project-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  transition: transform 0.3s ease;
+}
+
+.add-project-card:hover {
+  transform: translateY(-5px);
+}
+
+.custom-input {
+  border: 2px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.submit-btn {
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(45deg, #0056b3, #003980);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-label {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .add-project-container {
+    padding: 10px;
+  }
+  
+  .add-project-card {
+    margin: 10px;
+  }
+}
+
+/* Animation for form elements */
+.add-project-form > div {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger the animations */
+.add-project-form > div:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.add-project-form > div:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.add-project-form > div:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.add-project-form > div:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+.add-project-form > div:nth-child(5) {
+  animation-delay: 1s;
+}
+
+.add-project-form > div:nth-child(6) {
+  animation-delay: 1.2s;
+} 

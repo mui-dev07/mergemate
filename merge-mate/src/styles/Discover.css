@@ -1,0 +1,231 @@
+.search-container {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+.search-input {
+  padding-left: 35px;
+  border-radius: 20px;
+}
+
+.category-btn {
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.category-btn:hover {
+  background: #f8f9fa;
+}
+
+.category-btn.active {
+  background: #0d6efd;
+  color: white;
+}
+
+.filter-badge {
+  background: #f8f9fa;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-badge:hover {
+  background: #e9ecef;
+}
+
+.project-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-description {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.project-tag {
+  background: #e9ecef;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #495057;
+}
+
+.project-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.sidebar-wrapper {
+  height: calc(100vh - 56px);
+  position: sticky;
+  top: 56px;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar */
+.sidebar-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.custom-cards-container {
+  position: relative;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.custom-swipe-card {
+  position: absolute;
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  cursor: grab;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-out;
+  user-select: none;
+  will-change: transform;
+}
+
+.custom-swipe-card:active {
+  cursor: grabbing;
+}
+
+.custom-swipe-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.tag-badge {
+  background: #f0f4f8;
+  color: #4a5568;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.project-description {
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 16px 0;
+}
+
+/* Style the like/dislike buttons */
+.custom-swipe-card .btn-light {
+  width: 64px;
+  height: 64px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.custom-swipe-card .btn-light i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.custom-swipe-card .btn-light:hover {
+  transform: scale(1.1);
+}
+
+/* Add smooth animation for card exit */
+.custom-swipe-card.exit {
+  transition: transform 0.5s ease-out;
+}
+
+/* Add a subtle gradient background to the card */
+.custom-swipe-card {
+  background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.project-stats {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.project-stats span {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Add swipe indicators */
+.custom-swipe-card::before,
+.custom-swipe-card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-swipe-card::before {
+  left: -70px;
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.custom-swipe-card::after {
+  right: -70px;
+  background: rgba(0, 0, 255, 0.2);
+}
+
+.custom-swipe-card:hover::before,
+.custom-swipe-card:hover::after {
+  opacity: 1;
+} 

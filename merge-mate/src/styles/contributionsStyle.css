@@ -1,0 +1,69 @@
+.stat-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.contribution-card {
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.contribution-card:hover {
+  transform: translateX(5px);
+  border-left: 4px solid #0d6efd !important;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.reviewers-stack {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.reviewer-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-left: -10px;
+  transition: transform 0.2s ease;
+}
+
+.reviewer-avatar:hover {
+  transform: translateY(-3px);
+  z-index: 1;
+}
+
+.hover-effect {
+  transition: all 0.2s ease;
+}
+
+.hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15) !important;
+}
+
+.badge {
+  padding: 0.5em 1em;
+  font-weight: 500;
+}
+
+/* Animated background for hover effects */
+.contribution-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(13, 110, 253, 0.03));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.contribution-card:hover::before {
+  opacity: 1;
+} 
