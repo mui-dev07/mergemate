@@ -1,7 +1,8 @@
 .add-project-container {
+  margin-top: 20px;
   min-height: calc(100vh - 60px);
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 20px;
+  padding: 10px;
 }
 
 .add-project-card {
@@ -20,29 +21,29 @@
 .custom-input {
   border: 2px solid #e1e1e1;
   border-radius: 8px;
-  padding: 12px;
+  padding: 5px;
   transition: all 0.3s ease;
 }
 
 .custom-input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: rgb(33, 37, 41);
+  box-shadow: 0 0 0 0.2rem rgb(33, 37, 41, 0.25);
   transform: translateY(-2px);
 }
 
 .submit-btn {
-  padding: 12px;
-  border-radius: 8px;
+  padding: 8px;
+  border-radius: 2px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  background: linear-gradient(45deg, #007bff, #0056b3);
+  background: linear-gradient(45deg, #303235, #212529);
   border: none;
   transition: all 0.3s ease;
 }
 
 .submit-btn:hover {
-  background: linear-gradient(45deg, #0056b3, #003980);
+  background: linear-gradient(45deg,  #212529 ,#303235);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
@@ -58,7 +59,7 @@
   .add-project-container {
     padding: 10px;
   }
-  
+
   .add-project-card {
     margin: 10px;
   }
@@ -101,4 +102,6 @@
 
 .add-project-form > div:nth-child(6) {
   animation-delay: 1.2s;
-} 
+}
+
+

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/contributionsStyle.css";
+import { Helmet } from "react-helmet-async";
 
 const Contributions = () => {
   const [contributions] = useState([
@@ -40,7 +41,11 @@ const Contributions = () => {
   };
 
   return (
-    <div className="container-fluid bg-light min-vh-100 mt-5">
+    <>
+      <Helmet>
+        <title>Contributions | MergeMate</title>
+      </Helmet>
+      <div className="container-fluid bg-light min-vh-100 mt-5">
       <div className="row">
         <div className="col-lg-9 mx-auto">
           <div className="p-4">
@@ -118,7 +123,8 @@ const Contributions = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

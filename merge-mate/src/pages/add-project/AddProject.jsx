@@ -16,6 +16,10 @@ const AddProject = () => {
     // Add your form submission logic here
   };
 
+  const [previewImage, setPreviewImage] = useState(null);
+
+  
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData(prev => ({

@@ -9,7 +9,7 @@
   text-align: center;
   margin-bottom: 3rem;
   padding: 2rem;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #1b1e21 0%,#303235 100%);
   border-radius: 1rem;
   color: white;
 }
@@ -46,7 +46,7 @@
 
 .stat-card i {
   font-size: 2rem;
-  color: #6366f1;
+  color: #212529;
   margin-bottom: 1rem;
 }
 
@@ -92,7 +92,7 @@
 
 .day-bar {
   width: 20px;
-  background: #6366f1;
+  background: #212529;
   border-radius: 4px;
   transition: height 0.3s ease;
 }
@@ -129,7 +129,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #6366f1;
+  background: #212529;
   color: white;
   display: flex;
   align-items: center;

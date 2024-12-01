@@ -1,9 +1,9 @@
 .projects-container {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   min-height: calc(100vh - 56px);
 }
 
 .projects-title {
+  margin-top: 2rem;
   color: #2c3e50;
   font-weight: 700;
   text-transform: uppercase;

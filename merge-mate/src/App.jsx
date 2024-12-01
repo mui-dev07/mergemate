@@ -17,6 +17,9 @@ import AddProject from "./pages/add-project/AddProject";
 import Projects from "./pages/projects/Projects";
 import Contributors from "./pages/contributors/Contributors";
 import Overview from "./pages/dashboard/Overview";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './styles/toast.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -28,6 +31,14 @@ function App() {
           <Navbar
             isAuthenticated={isAuthenticated}
             setIsAuthenticated={setIsAuthenticated}
+          />
+          <ToastContainer 
+            position="bottom-right"
+            autoClose={3000}
+            limit={1}
+            closeButton={true}
+            closeOnClick={true} 
+            className="toast-container"
           />
           <Routes>
             <Route

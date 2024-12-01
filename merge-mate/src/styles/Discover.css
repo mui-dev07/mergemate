@@ -86,6 +86,8 @@
   position: sticky;
   top: 56px;
   overflow-y: auto;
+  background: white;
+  z-index: 10;
 }
 
 /* Custom scrollbar */
@@ -204,7 +206,7 @@
 /* Add swipe indicators */
 .custom-swipe-card::before,
 .custom-swipe-card::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -228,4 +230,49 @@
 .custom-swipe-card:hover::before,
 .custom-swipe-card:hover::after {
   opacity: 1;
-} 
+}
+
+/* Base styles for the layout container */
+.d-flex.flex-column.flex-lg-row {
+  min-height: calc(100vh - 56px);
+  width: 100%;
+}
+
+.main-content-wrapper {
+  flex: 1;
+  min-height: calc(100vh - 56px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .d-flex.flex-column.flex-lg-row {
+    flex-direction: column !important;
+    height: auto;
+  }
+
+  .sidebar-wrapper {
+    position: relative;
+    height: auto;
+    width: 100%;
+    overflow: visible;
+    margin-top: 56px;
+  }
+
+  .main-content-wrapper {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .custom-cards-container {
+    position: relative;
+    height: 70vh;
+    margin-bottom: 40px;
+  }
+
+  .custom-swipe-card {
+    position: absolute;
+    width: 90%;
+    max-width: 400px;
+  }
+}

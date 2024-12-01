@@ -1,6 +1,10 @@
 .task-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  height: 100%;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .task-card:hover {
@@ -72,11 +76,39 @@
   width: 20px;
 }
 
+/* Main content adjustments */
+.main-content {
+  padding: 20px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Card grid adjustments */
+.tasks-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
 /* Responsive adjustments */
+@media (max-width: 1200px) {
+  .tasks-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .sidebar-wrapper {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    position: static;
+    width: 100%;
+    margin-bottom: 1rem;
   }
-} 
+
+  .main-content {
+    padding: 15px;
+  }
+
+  .tasks-grid {
+    grid-template-columns: 1fr;
+  }
+}
