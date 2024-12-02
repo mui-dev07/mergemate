@@ -99,7 +99,10 @@ function App() {
             />
             
             <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="/tasks/new" element={<NewTask />} />
+            <Route
+              path="/tasks/new"
+              element={isAuthenticated ? <NewTask /> : <Navigate to="/login" />}
+            />
           </Routes>
         </div>
       </Router>
