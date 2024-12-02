@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
+import { authenticateWithGithub } from "../api/auth";
 
 export const AuthContext = createContext(null);
 
@@ -50,8 +51,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const loginWithGithub = async (code) => {
+    try {
+      const response = await authenticateWithGithub(code);
+      setUser(response.user);
+      localStorage.setItem('token', response.token);
+      navigate('/dashboard');
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      loading, 
+      login, 
+      logout,
+      loginWithGithub 
+    }}>
       {!loading && children}
     </AuthContext.Provider>
   );
