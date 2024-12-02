@@ -8,7 +8,7 @@
 <div align="center">
 
 [![Laravel](https://img.shields.io/badge/Laravel-v11.31-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-v8.2-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![PHP](https://img.shields.io/badge/PHP-v8.3-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
 [![GitHub](https://img.shields.io/badge/GitHub_OAuth-Integration-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
@@ -41,7 +41,6 @@
 git clone https://github.com/your-username/mergemate-backend.git
 cd mergemate-backend
 ```
-````
 
 2. **Install dependencies**
 
