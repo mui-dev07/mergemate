@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/Contributors.css";
+import Button from "../../components/Button";
 
 const Contributors = () => {
   // Mock data - replace with actual API data later
@@ -14,7 +15,37 @@ const Contributors = () => {
       skills: ["React", "TypeScript", "CSS"],
       lastActive: "2 hours ago"
     },
-    // Add more mock contributors as needed
+    {
+      id: 2,
+      name: "James Smith",
+      avatar: "https://github.com/github-user1.png",
+      role: "Backend Developer",
+      contributions: 204,
+      status: "active",
+      skills: ["Node.js", "Express", "MongoDB"],
+      lastActive: "30 minutes ago",
+    },
+    {
+      id: 3,
+      name: "Emily Johnson",
+      avatar: "https://github.com/github-user2.png",
+      role: "UI/UX Designer",
+      contributions: 98,
+      status: "inactive",
+      skills: ["Figma", "Sketch", "Adobe XD"],
+      lastActive: "3 days ago",
+    },
+    {
+      id: 4,
+      name: "Michael Brown",
+      avatar: "https://github.com/github-user3.png",
+      role: "Full-Stack Developer",
+      contributions: 321,
+      status: "active",
+      skills: ["Angular", "Java", "SQL"],
+      lastActive: "5 minutes ago",
+    },
+    
   ]);
 
   return (
@@ -26,23 +57,24 @@ const Contributors = () => {
             <h4 className="fw-bold mb-1">Project Contributors</h4>
             <p className="text-muted mb-0">Manage and view project contributors</p>
           </div>
-          <button className="btn btn-primary shadow-sm hover-effect">
+          
+          <Button variant="navbar">
             <i className="bi bi-plus-lg me-2"></i>
             Invite Contributor
-          </button>
+          </Button>
         </div>
 
         {/* Stats Cards */}
-        <div className="row g-4 mb-4">
+        <div className="row g-4 mb-4 text-center justify-content-center">
           {[
             { label: "Total Contributors", value: "24", icon: "bi-people-fill" },
             { label: "Active This Week", value: "18", icon: "bi-person-check-fill" },
             { label: "Pending Invites", value: "3", icon: "bi-envelope" },
           ].map((stat, index) => (
             <div key={index} className="col-md-4">
-              <div className="stat-card border rounded-3 p-4 bg-white shadow-sm">
+              <div className="stat-card border rounded-3 p-4 bg-white shadow-sm text-center">
                 <div className="d-flex align-items-center">
-                  <div className="stat-icon-wrapper me-3">
+                  <div className="stat-icon-wrapper me-3 d-flex align-items-center pt-2">
                     <i className={`bi ${stat.icon}`}></i>
                   </div>
                   <div>
@@ -95,10 +127,6 @@ const Contributors = () => {
                 </div>
 
                 <div className="contributor-actions">
-                  <button className="btn btn-outline-primary btn-sm">
-                    <i className="bi bi-chat-dots me-2"></i>
-                    Message
-                  </button>
                   <button className="btn btn-outline-secondary btn-sm">
                     <i className="bi bi-three-dots"></i>
                   </button>

@@ -16,10 +16,12 @@ import Notifications from "./pages/notifications/Notifications";
 import AddProject from "./pages/add-project/AddProject";
 import Projects from "./pages/projects/Projects";
 import Contributors from "./pages/contributors/Contributors";
-import Overview from "./pages/dashboard/Overview";
+import Overview from "./pages/dashboard/Overview";  
+import Profile from "./pages/profile/Profile";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import './styles/toast.css';
+import NewTask from './pages/tasks/NewTask';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -91,8 +93,13 @@ function App() {
               path="/contributors"
               element={isAuthenticated ? <Contributors /> : <Navigate to="/login" />}
             />
+            <Route
+              path="/profile"
+              element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
+            />
             
             <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/tasks/new" element={<NewTask />} />
           </Routes>
         </div>
       </Router>

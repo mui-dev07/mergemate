@@ -185,7 +185,7 @@ const Discover = () => {
                     key={category}
                     className={`btn category-btn ${
                       selectedCategory === category.toLowerCase()
-                        ? "active"
+                        ? "active_fltr"
                         : ""
                     }`}
                     onClick={() => setSelectedCategory(category.toLowerCase())}

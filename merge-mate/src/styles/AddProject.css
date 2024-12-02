@@ -1,107 +1,154 @@
 .add-project-container {
-  margin-top: 20px;
-  min-height: calc(100vh - 60px);
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 10px;
+  min-height: 80vh;
+  background: linear-gradient(135deg, #f4f5f7 0%, #e9ecef 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
 }
 
-.add-project-card {
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.95);
-  transition: transform 0.3s ease;
-}
-
-.add-project-card:hover {
-  transform: translateY(-5px);
-}
-
-.custom-input {
-  border: 2px solid #e1e1e1;
-  border-radius: 8px;
-  padding: 5px;
+.project-card {
+  border-radius: 1rem;
+  overflow: hidden;
   transition: all 0.3s ease;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.custom-input:focus {
-  border-color: rgb(33, 37, 41);
-  box-shadow: 0 0 0 0.2rem rgb(33, 37, 41, 0.25);
-  transform: translateY(-2px);
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-.submit-btn {
-  padding: 8px;
-  border-radius: 2px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  background: linear-gradient(45deg, #303235, #212529);
-  border: none;
-  transition: all 0.3s ease;
+.project-title {
+  font-weight: 700;
+  color: #343a40;
+  position: relative;
+  padding-bottom: 8px;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem !important;
 }
 
-.submit-btn:hover {
-  background: linear-gradient(45deg,  #212529 ,#303235);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+.project-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: #343a40;
 }
 
 .form-label {
   font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 8px;
+  color: #495057;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
 }
 
-/* Responsive adjustments */
+.sleek-input {
+  border: none;
+  border-bottom: 2px solid #ced4da;
+  border-radius: 0;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  font-size: 0.9rem;
+}
+
+.sleek-input:focus {
+  border-color: #343a40;
+  box-shadow: none;
+}
+
+.submit-btn {
+  background-color: #343a40;
+  border: none;
+  padding: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #212529;
+  transform: translateY(-3px);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
+}
+
+.project-preview {
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.img-bg {
+  min-height: 300px;
+  cursor: pointer;
+}
+
+.img-bg:hover {
+  opacity: 0.9;
+}
+
+.project-preview-horizontal {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.add-project-form {
+  padding: 2rem !important;
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-  .add-project-container {
-    padding: 10px;
+  .project-card {
+    margin: 1rem;
   }
 
-  .add-project-card {
-    margin: 10px;
+  .card-body {
+    padding: 2rem !important;
   }
 }
 
-/* Animation for form elements */
-.add-project-form > div {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s ease forwards;
-}
-
+/* Subtle Animations */
 @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Stagger the animations */
-.add-project-form > div:nth-child(1) {
+
+.add-project-form > .form-group {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.add-project-form > .form-group:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.add-project-form > .form-group:nth-child(2) {
   animation-delay: 0.2s;
 }
-
-.add-project-form > div:nth-child(2) {
+.add-project-form > .form-group:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.add-project-form > .form-group:nth-child(4) {
   animation-delay: 0.4s;
 }
-
-.add-project-form > div:nth-child(3) {
-  animation-delay: 0.6s;
+.add-project-form > .form-group:nth-child(5) {
+  animation-delay: 0.5s;
 }
 
-.add-project-form > div:nth-child(4) {
-  animation-delay: 0.8s;
+.form-group {
+  margin-bottom: 1rem !important;
 }
-
-.add-project-form > div:nth-child(5) {
-  animation-delay: 1s;
-}
-
-.add-project-form > div:nth-child(6) {
-  animation-delay: 1.2s;
-}
-
-

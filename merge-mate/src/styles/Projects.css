@@ -29,9 +29,9 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: #2ecc71;
+  background: #26a65c;
   color: white;
-  padding: 0.25rem 0.75rem;
+  padding: 0.20rem 0.65rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -56,8 +56,8 @@
 }
 
 .tech-badge {
-  background: #e0e7ff;
-  color: #4c6ef5;
+  background: #c9ccd6;
+  color: #212529;
   padding: 0.25rem 0.75rem;
   border-radius: 15px;
   font-size: 0.8rem;
@@ -86,7 +86,7 @@
 }
 
 .progress-bar {
-  background: linear-gradient(45deg, #4c6ef5, #15aabf);
+  background: linear-gradient(45deg, #61676e, #212529);
   border-radius: 1rem;
   transition: width 1s ease-in-out;
 }

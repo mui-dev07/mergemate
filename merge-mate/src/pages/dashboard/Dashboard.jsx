@@ -35,6 +35,12 @@ const Dashboard = () => {
       label: "My Contributions",
       link: "/contributions",
     },
+    { 
+      icon: "bi-person", 
+      label: "Profile", 
+      link: "/profile",
+      className: "profile-link" 
+    },
   ];
 
   const ownerNavItems = [
@@ -47,6 +53,12 @@ const Dashboard = () => {
     { icon: "bi-plus-circle", label: "Add Project", link: "/add-project" },
     { icon: "bi-kanban", label: "Project Boards", link: "/projects" },
     { icon: "bi-people", label: "Contributors", link: "/contributors" },
+    { 
+      icon: "bi-person", 
+      label: "Profile", 
+      link: "/profile",
+      className: "profile-link" 
+    },
   ];
 
   const navItems =
@@ -67,28 +79,30 @@ const Dashboard = () => {
           <div className={`sidebar-wrapper ${isSidebarOpen ? "active" : ""}`}>
             <div className="p-4 sticky-top">
               {/* Profile Section */}
-              <div className="profile-card p-3 mb-4 rounded-3 bg-white shadow-sm hover-effect transition-all">
-                <div className="d-flex align-items-center">
-                  <div className="position-relative">
-                    <img
-                      src={user.avatar}
-                      alt="Profile"
-                      className="rounded-circle border-3 border-primary profile-image"
-                      width="50"
-                      height="50"
-                    />
-                    <span className="status-indicator"></span>
-                  </div>
-                  <div className="ms-3">
-                    <span className="fw-bold text-dark d-block">
-                      {user.name}
-                    </span>
-                    <small className="text-primary text-capitalize fw-medium">
-                      {userRole}
-                    </small>
+              <Link to="/profile" className="text-decoration-none">
+                <div className="profile-card p-3 mb-4 rounded-3 bg-white shadow-sm hover-effect transition-all">
+                  <div className="d-flex align-items-center">
+                    <div className="position-relative">
+                      <img
+                        src={user.avatar}
+                        alt="Profile"
+                        className="rounded-circle border-3 border-primary profile-image"
+                        width="50"
+                        height="50"
+                      />
+                      <span className="status-indicator"></span>
+                    </div>
+                    <div className="ms-3">
+                      <span className="fw-bold text-dark d-block">
+                        {user.name}
+                      </span>
+                      <small className="text-primary text-capitalize fw-medium">
+                        {userRole}
+                      </small>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
 
               {/* Navigation Menu */}
               <nav className="nav flex-column gap-2">

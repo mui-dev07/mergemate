@@ -1,16 +1,21 @@
-import { API_BASE_URL } from '../config/constants';
+import api from './axios';
+
+export const login = async (credentials) => {
+  const response = await api.post('/api/login', credentials);
+  return response.data;
+};
+
+export const logout = async () => {
+  const response = await api.post('/api/logout');
+  return response.data;
+};
+
+export const getUser = async () => {
+  const response = await api.get('/api/user');
+  return response.data;
+};
 
 export const authenticateWithGithub = async (code) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/auth/github`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ code }),
-    });
-    return await response.json();
-  } catch (error) {
-    throw new Error('Authentication failed');
-  }
+  const response = await api.post('/api/auth/github', { code });
+  return response.data;
 };

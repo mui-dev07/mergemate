@@ -104,7 +104,7 @@
 .contributor-actions {
   display: flex;
   gap: 0.5rem;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .hover-effect {
