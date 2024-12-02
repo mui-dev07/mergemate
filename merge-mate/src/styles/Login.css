@@ -118,4 +118,23 @@ input:focus {
 
 .login-footer a:hover {
   text-decoration: underline;
+}
+
+.github-sign-in-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  background-color: #24292e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.github-sign-in-btn:hover {
+  background-color: #2c3238;
 } 

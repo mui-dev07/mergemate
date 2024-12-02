@@ -18,7 +18,7 @@ import Projects from "./pages/projects/Projects";
 import Contributors from "./pages/contributors/Contributors";
 import Overview from "./pages/dashboard/Overview";
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 import './styles/toast.css';
 
 function App() {

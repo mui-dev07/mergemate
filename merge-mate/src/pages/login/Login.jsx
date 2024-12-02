@@ -1,24 +1,35 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Helmet } from 'react-helmet-async';
+import { GITHUB_CLIENT_ID } from '../../config/constants';
+import { authenticateWithGithub } from '../../api/auth';
 import "../../styles/Login.css";
 
 function Login({ setIsAuthenticated }) {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  useEffect(() => {
+    // Handle OAuth callback
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    
+    if (code) {
+      handleGithubCallback(code);
+    }
+  }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add actual authentication logic here
-    setIsAuthenticated(true);
+  const handleGithubCallback = async (code) => {
+    try {
+      const response = await authenticateWithGithub(code);
+      if (response.token) {
+        localStorage.setItem('token', response.token);
+        setIsAuthenticated(true);
+      }
+    } catch (error) {
+      console.error('Authentication failed:', error);
+    }
   };
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleGithubLogin = () => {
+    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user`;
+    window.location.href = githubAuthUrl;
   };
 
   return (
@@ -33,39 +44,13 @@ function Login({ setIsAuthenticated }) {
             <h1>Sign in to MergeMate</h1>
           </div>
           <div className="login-form-container">
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="email">Email address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <div className="password-header">
-                  <label htmlFor="password">Password</label>
-                  <a href="#" className="forgot-link">Forgot password?</a>
-                </div>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <button type="submit" className="sign-in-btn">
-                Sign in
-              </button>
-            </form>
-          </div>
-          <div className="login-footer">
-            <p>New to MergeMate? <a href="#">Create an account</a>.</p>
+            <button 
+              onClick={handleGithubLogin}
+              className="github-sign-in-btn"
+            >
+              <i className="bi bi-github"></i>
+              Continue with GitHub
+            </button>
           </div>
         </div>
       </div>
