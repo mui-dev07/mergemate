@@ -188,8 +188,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Adnan Hasnain** - _Curry & Compiler_
 
--   GitHub: [@adnanhasnain](https://github.com/adnanhasnain)
--   LinkedIn: [Adnan Hasnain](https://linkedin.com/in/adnanhasnain)
+-   GitHub: [@adnanhasnain](https://github.com/Dev-Adnan27)
+-   LinkedIn: [Adnan Hasnain](https://www.linkedin.com/in/dev-adnan27/)
 
 ## 🙏 Acknowledgments
 
