@@ -1,66 +1,207 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+````markdown
+# MergeMate Backend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<div align="center">
+<h1> Merge Mate</h1>
+<p>🚀 A powerful backend system for connecting open-source projects with contributors</p>
+</div>
 
-## About Laravel
+<div align="center">
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+[![Laravel](https://img.shields.io/badge/Laravel-v11.31-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-v8.2-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![GitHub](https://img.shields.io/badge/GitHub_OAuth-Integration-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+</div>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🌟 Features
 
-## Learning Laravel
+-   **GitHub OAuth Integration**: Seamless authentication with GitHub
+-   **Project Management**: Create and manage open-source projects
+-   **Task Tracking**: Organize project tasks with difficulty levels
+-   **Contribution System**: Track and manage project contributions
+-   **User Profiles**: GitHub-synchronized profiles with expertise tracking
+-   **API-First Design**: RESTful API endpoints for all functionality
+-   **Real-time Updates**: WebSocket support for live notifications
+-   **Smart Matching**: Connect contributors with suitable projects
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 📋 Prerequisites
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   PHP >= 8.2
+-   Composer
+-   MySQL/MariaDB
+-   Node.js & NPM
+-   GitHub OAuth Application credentials
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Quick Start
 
-## Laravel Sponsors
+1. **Clone the repository**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+git clone https://github.com/your-username/mergemate-backend.git
+cd mergemate-backend
+```
+````
 
-### Premium Partners
+2. **Install dependencies**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```bash
+composer install
+npm install
+```
 
-## Contributing
+3. **Environment setup**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Code of Conduct
+4. **Configure environment variables**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```env
+APP_NAME=MergeMate
+APP_ENV=local
+APP_URL=http://localhost:8000
 
-## Security Vulnerabilities
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=mergemate
+DB_USERNAME=root
+DB_PASSWORD=
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+GITHUB_CLIENT_ID=your_client_id
+GITHUB_CLIENT_SECRET=your_client_secret
+GITHUB_CALLBACK_URL=http://localhost:8000/api/auth/github/callback
+```
 
-## License
+5. **Database setup**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan migrate
+```
+
+6. **Start the development server**
+
+```bash
+php artisan serve
+```
+
+## 🏗️ Architecture
+
+### Database Schema
+
+The application uses several key tables:
+
+-   **Users**: Store user information and GitHub integration data
+
+```php:database/migrations/0001_01_01_000000_create_users_table.php
+startLine: 14
+endLine: 40
+```
+
+-   **Projects**: Manage open-source projects
+
+```php:database/migrations/2024_12_02_085251_create_projects_table.php
+startLine: 11
+endLine: 22
+```
+
+-   **Tasks**: Track project tasks and their status
+
+```php:database/migrations/2024_12_02_085329_create_tasks_table.php
+startLine: 14
+endLine: 23
+```
+
+### API Endpoints
+
+#### Authentication
+
+-   `GET /api/auth/github`: GitHub OAuth redirect
+-   `GET /api/auth/github/callback`: OAuth callback handler
+-   `POST /api/logout`: User logout
+
+#### Projects
+
+-   `GET /api/projects`: List all projects
+-   `POST /api/projects`: Create a new project
+-   `GET /api/projects/{id}`: Get project details
+-   `PUT /api/projects/{id}`: Update project
+-   `DELETE /api/projects/{id}`: Delete project
+
+#### Tasks
+
+-   `GET /api/tasks`: List tasks
+-   `POST /api/tasks`: Create task
+-   `GET /api/tasks/{id}`: Get task details
+-   `PUT /api/tasks/{id}`: Update task
+-   `DELETE /api/tasks/{id}`: Delete task
+
+#### Contributions
+
+-   `POST /api/tasks/{task}/contribute`: Submit contribution
+-   `GET /api/contributions`: List contributions
+-   `PUT /api/contributions/{id}`: Update contribution status
+
+## 🔒 Security
+
+-   Implements Laravel Sanctum for API authentication
+-   GitHub OAuth for secure user authentication
+-   CSRF protection enabled
+-   Rate limiting on API endpoints
+-   Secure password hashing
+
+## 🧪 Testing
+
+Run the test suite:
+
+```bash
+php artisan test
+```
+
+## 📦 Deployment
+
+1. Set up production environment
+2. Configure web server (Nginx/Apache)
+3. Set up SSL certificate
+4. Configure environment variables
+5. Run migrations
+
+```bash
+php artisan migrate --force
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Adnan Hasnain** - _Curry & Compiler_
+
+-   GitHub: [@adnanhasnain](https://github.com/adnanhasnain)
+-   LinkedIn: [Adnan Hasnain](https://linkedin.com/in/adnanhasnain)
+
+## 🙏 Acknowledgments
+
+-   Laravel Team for the amazing framework
+-   GitHub for OAuth integration support
+-   All contributors who help improve this project
+
+---
+
+<div align="center">
+  Made with ❤️ by Curry & Compiler
+</div>
+```
