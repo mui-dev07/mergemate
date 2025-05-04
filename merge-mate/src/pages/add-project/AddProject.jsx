@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import "../../styles/AddProject.css";
+import PageLayout from '../../components/PageLayout';
 
 const AddProject = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,13 @@ const AddProject = () => {
   });
 
   const [previewImage, setPreviewImage] = useState(null);
+
+  // Header component
+  const AddProjectHeader = (
+    <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <h2 className="mb-0">Add New Project</h2>
+    </div>
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,19 +73,20 @@ const AddProject = () => {
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Add New Project | MergeMate</title>
-      </Helmet>
+    <PageLayout
+      title="Add Project"
+      description="Add a new project to your portfolio"
+      header={AddProjectHeader}
+    >
       <div className="add-project-container">
-        <div className="container-fluid py-5">
+        <div className="container-fluid py-3 py-md-5">
           <div className="row justify-content-center">
             <div className="col-lg-10 col-xl-12">
-              <div className="card project-card shadow-lg border-0">
+              <div className="card project-card shadow-sm border">
                 <div className="card-body p-0">
                   <div className="row g-0">
                     {/* Image Preview Section */}
-                    <div className="col-md-5 bg-dark img-bg position-relative"
+                    <div className="col-md-5 img-bg position-relative"
                          onDragOver={handleDragOver}
                          onDrop={handleDrop}>
                       {previewImage ? (
@@ -88,7 +96,7 @@ const AddProject = () => {
                           className="w-100 h-100 object-fit-cover project-preview-horizontal"
                         />
                       ) : (
-                        <div className="w-100 h-100 d-flex flex-column align-items-center justify-content-center text-white opacity-75">
+                        <div className="w-100 h-100 d-flex flex-column align-items-center justify-content-center opacity-75 upload-placeholder">
                           <i className="bi bi-cloud-upload fs-1 mb-2"></i>
                           <span>Drag and drop an image here</span>
                           <span className="mt-2">- or -</span>
@@ -106,7 +114,7 @@ const AddProject = () => {
                         />
                         <label 
                           htmlFor="projectImageUpload" 
-                          className="btn btn-light position-absolute bottom-0 start-0 m-3"
+                          className="btn btn-primary position-absolute bottom-0 start-0 m-3"
                         >
                           Upload Image
                         </label>
@@ -115,8 +123,8 @@ const AddProject = () => {
 
                     {/* Form Section */}
                     <div className="col-md-7">
-                      <form onSubmit={handleSubmit} className="p-5 add-project-form">
-                        <h2 className="text-center mb-5 project-title">Add New Project</h2>
+                      <form onSubmit={handleSubmit} className="p-3 p-md-5 add-project-form">
+                        <h3 className="mb-4 form-section-title">Project Details</h3>
                         
                         {/* Project Name */}
                         <div className="form-group mb-4">
@@ -178,7 +186,7 @@ const AddProject = () => {
                         <div className="d-grid">
                           <button 
                             type="submit" 
-                            className="btn btn-dark btn-lg submit-btn"
+                            className="btn btn-primary btn-lg submit-btn"
                           >
                             Add Project
                           </button>
@@ -192,7 +200,7 @@ const AddProject = () => {
           </div>
         </div>
       </div>
-    </>
+    </PageLayout>
   );
 };
 

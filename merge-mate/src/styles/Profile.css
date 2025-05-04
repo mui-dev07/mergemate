@@ -3,17 +3,109 @@
   margin: 0 auto;
 }
 
+.profile-card {
+  background-color: var(--surface);
+  border-color: var(--border);
+  transition: all 0.3s ease;
+}
+
+.profile-image {
+  border: 3px solid var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
 .repo-card {
   transition: all 0.3s ease;
-  background-color: #fff;
+  background-color: var(--surface);
+  border-color: var(--border) !important;
 }
 
 .repo-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
-.badge {
+.repo-name {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.tech-badge {
+  background-color: var(--primary);
+  color: white;
   padding: 0.5em 1em;
   font-weight: 500;
+  border-radius: var(--border-radius-md);
+}
+
+.form-control, .form-select {
+  background-color: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: var(--surface);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.25rem rgba(82, 113, 255, 0.25);
+  color: var(--text);
+}
+
+.form-label {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.card-title {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* Fix text colors for proper contrast */
+.profile-container h3,
+.profile-container p,
+.profile-container span,
+.profile-container .text-capitalize {
+  color: var(--text);
+}
+
+.profile-container .text-muted {
+  color: var(--textSecondary) !important;
+}
+
+/* Repository card text fixes */
+.repo-card p.small.text-muted {
+  color: var(--textSecondary) !important;
+}
+
+.repo-card span {
+  color: var(--text);
+}
+
+/* Icon colors */
+.profile-container .bi-geo-alt,
+.profile-container .bi-building {
+  color: var(--primary);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .profile-image {
+    margin: 0 auto;
+    display: block;
+  }
+  
+  .profile-container h3 {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .profile-container .text-muted {
+    text-align: center;
+  }
+  
+  .profile-container .d-flex.flex-wrap.gap-3 {
+    justify-content: center;
+  }
 } 

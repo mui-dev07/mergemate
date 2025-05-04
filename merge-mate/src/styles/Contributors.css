@@ -3,19 +3,34 @@
   margin: 0 auto;
 }
 
+.content-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+}
+
 .stat-card {
+  background-color: var(--surface);
+  border-color: var(--border);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card h6 {
+  color: var(--textSecondary);
+}
+
+.stat-card h3 {
+  color: var(--text);
 }
 
 .stat-icon-wrapper {
   width: 48px;
   height: 48px;
-  background: linear-gradient(45deg, #007bff20, #007bff10);
+  background: rgba(var(--primary-rgb), 0.1);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -24,27 +39,27 @@
 
 .stat-icon-wrapper i {
   font-size: 24px;
-  color: #007bff;
+  color: var(--primary);
 }
 
 .contributors-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
   padding: 1rem 0;
 }
 
 .contributor-card {
-  background: white;
+  background: var(--surface);
   border-radius: 12px;
   padding: 1.5rem;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border);
   transition: all 0.3s ease;
 }
 
 .contributor-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .contributor-header {
@@ -54,13 +69,17 @@
   margin-bottom: 1rem;
 }
 
+.contributor-info h6 {
+  color: var(--text);
+}
+
 .contributor-avatar {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 3px solid var(--surface);
+  box-shadow: var(--shadow-sm);
 }
 
 .status-dot {
@@ -70,11 +89,15 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid var(--surface);
 }
 
 .status-active {
-  background-color: #28a745;
+  background-color: var(--success);
+}
+
+.status-inactive {
+  background-color: var(--textSecondary);
 }
 
 .contributor-stats {
@@ -82,7 +105,11 @@
   gap: 1rem;
   margin-bottom: 1rem;
   font-size: 0.9rem;
-  color: #6c757d;
+  color: var(--textSecondary);
+}
+
+.contributor-stats i {
+  color: var(--primary);
 }
 
 .skills-container {
@@ -93,12 +120,12 @@
 }
 
 .skill-tag {
-  background: #f8f9fa;
+  background: rgba(var(--primary-rgb), 0.1);
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.8rem;
-  color: #495057;
-  border: 1px solid #e9ecef;
+  color: var(--primary);
+  border: 1px solid var(--border);
 }
 
 .contributor-actions {
@@ -113,7 +140,14 @@
 
 .hover-effect:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .contributors-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
@@ -123,5 +157,14 @@
   
   .stat-card {
     margin-bottom: 1rem;
+  }
+  
+  .contributor-card {
+    padding: 1rem;
+  }
+  
+  .contributor-stats {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }

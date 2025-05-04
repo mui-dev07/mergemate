@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../../styles/notifications.css";
-import { Helmet } from "react-helmet-async";
 import Button from "../../components/Button";
+import PageLayout from "../../components/PageLayout";
+import ResponsiveContainer from "../../components/ResponsiveContainer";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([
@@ -29,6 +30,22 @@ const Notifications = () => {
       time: "1 day ago",
       read: true,
     },
+    {
+      id: 4,
+      type: "mention",
+      content: "Maria mentioned you in a comment",
+      project: "Project Delta",
+      time: "2 days ago",
+      read: true,
+    },
+    {
+      id: 5,
+      type: "review",
+      content: "Changes requested on your PR #56",
+      project: "Project Alpha",
+      time: "3 days ago",
+      read: true,
+    },
   ]);
 
   const getNotificationIcon = (type) => {
@@ -44,6 +61,19 @@ const Notifications = () => {
     }
   };
 
+  const getIconBgClass = (type) => {
+    switch (type) {
+      case "mention":
+        return "mention-bg";
+      case "review":
+        return "review-bg";
+      case "task":
+        return "task-bg";
+      default:
+        return "default-bg";
+    }
+  };
+
   const markAsRead = (id) => {
     setNotifications(
       notifications.map((notif) =>
@@ -52,58 +82,83 @@ const Notifications = () => {
     );
   };
 
-  return (
-    <>
-      <Helmet>
-        <title>Notifications | MergeMate</title>
-      </Helmet>
-      <div className="container-fluid bg-light min-vh-100 mt-5">
-        <div className="row justify-content-center">
-          <div className="col-lg-8 col-md-10">
-            <div className="notifications-container p-4">
-              <div className="d-flex justify-content-between align-items-center mb-4">
-                <h4 className="fw-bold">Notifications</h4>
-                <Button variant="navbar" onClick={() => markAllAsRead()}>
-                  Mark all as read
-                </Button>
-              </div>
+  const markAllAsRead = () => {
+    setNotifications(
+      notifications.map((notif) => ({ ...notif, read: true }))
+    );
+  };
 
-              <div className="notifications-list">
-                {notifications.map((notification) => (
-                  <div
-                    key={notification.id}
-                    className={`notification-card ${
-                      notification.read ? "read" : "unread"
-                    }`}
-                    onClick={() => markAsRead(notification.id)}
-                  >
-                    <div className="notification-icon">
-                      <i
-                        className={`bi ${getNotificationIcon(
-                          notification.type
-                        )}`}
-                      ></i>
-                    </div>
-                    <div className="notification-content">
-                      <div className="notification-header">
-                        <h6 className="mb-0">{notification.project}</h6>
-                        <span className="notification-time">
-                          {notification.time}
-                        </span>
-                      </div>
-                      <p className="mb-0">{notification.content}</p>
-                    </div>
-                    {!notification.read && (
-                      <span className="unread-indicator"></span>
-                    )}
+  const unreadCount = notifications.filter(n => !n.read).length;
+
+  // Header component
+  const NotificationsHeader = (
+    <div className="d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div>
+        <h2 className="mb-0">Notifications</h2>
+        {unreadCount > 0 && (
+          <p className="text-muted mb-0">You have {unreadCount} unread notifications</p>
+        )}
+      </div>
+      <Button 
+        variant="outline-primary"
+        onClick={markAllAsRead}
+        disabled={unreadCount === 0}
+      >
+        <i className="bi bi-check-all me-1"></i>
+        Mark all as read
+      </Button>
+    </div>
+  );
+
+  return (
+    <PageLayout
+      title="Notifications"
+      description="Your notification center"
+      header={NotificationsHeader}
+    >
+      <div className="notifications-container">
+        <div className="notifications-list animate-fade-in">
+          {notifications.length > 0 ? (
+            notifications.map((notification, index) => (
+              <div
+                key={notification.id}
+                className={`notification-card ${
+                  notification.read ? "read" : "unread"
+                } animate-slide-up`}
+                style={{ animationDelay: `${index * 0.05}s` }}
+                onClick={() => markAsRead(notification.id)}
+              >
+                <div className={`notification-icon ${getIconBgClass(notification.type)}`}>
+                  <i
+                    className={`bi ${getNotificationIcon(
+                      notification.type
+                    )}`}
+                  ></i>
+                </div>
+                <div className="notification-content">
+                  <div className="notification-header">
+                    <h6 className="mb-0">{notification.project}</h6>
+                    <span className="notification-time">
+                      {notification.time}
+                    </span>
                   </div>
-                ))}
+                  <p className="mb-0">{notification.content}</p>
+                </div>
+                {!notification.read && (
+                  <span className="unread-indicator"></span>
+                )}
               </div>
+            ))
+          ) : (
+            <div className="empty-state text-center p-5">
+              <i className="bi bi-bell-slash fs-1 text-muted mb-3"></i>
+              <h5>No notifications</h5>
+              <p className="text-muted">You're all caught up!</p>
             </div>
-          </div>
+          )}
         </div>
       </div>
-    </>
+    </PageLayout>
   );
 };
 

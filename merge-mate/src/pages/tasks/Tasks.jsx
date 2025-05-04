@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "../../styles/Tasks.css";
-import { Helmet } from "react-helmet-async";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
+import PageLayout from "../../components/PageLayout";
+import { useTheme } from "../../context/ThemeContext";
 
 const Tasks = () => {
   const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
 
   // Mock tasks data - replace with actual data later
   const [tasks, setTasks] = useState([
@@ -56,47 +58,50 @@ const Tasks = () => {
     navigate('/tasks/new');
   };
 
+  // Tasks header component
+  const TasksHeader = (
+    <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+      <h4 className="mb-0 fw-bold">My Tasks</h4>
+      <Button variant="primary" onClick={handleAddNewTask}>
+        <i className="bi bi-plus-lg me-2"></i>Add New Task
+      </Button>
+    </div>
+  );
+
   return (
-    <>
-      <Helmet>
-        <title>Tasks | MergeMate</title>
-      </Helmet>
-      <div className="container-fluid bg-light min-vh-100 mt-5">
-        <div className="row g-0">
-          <div className="col-lg-3 col-md-4 sidebar-wrapper">
-            <div className="p-3">
-              <div className="filter-card p-3 rounded-3 bg-white shadow-sm">
-                <h5 className="mb-3">Filters</h5>
-                <div className="d-flex flex-column gap-2">
-                  {["all", "todo", "in-progress", "completed"].map((status) => (
-                    <button
-                      key={status}
-                      className={`btn ${
-                        filter === status ? "btn-dark" : "btn-outline-dark"
-                      } text-capitalize w-100 hover-effect`}
-                      onClick={() => setFilter(status)}
-                    >
-                      {status.replace("-", " ")}
-                    </button>
-                  ))}
-                </div>
+    <PageLayout
+      title="Tasks"
+      description="Manage your MergeMate tasks"
+      header={TasksHeader}
+      className="tasks-page"
+    >
+      <div className="tasks-container animate-fade-in">
+        <div className="row g-4">
+          <div className="col-md-3 mb-4 mb-md-0">
+            <div className={`filter-card p-3 rounded-3 shadow-sm ${isDarkMode ? 'filter-card-dark' : ''}`}>
+              <h5 className="mb-3">Filters</h5>
+              <div className="d-flex flex-column gap-2">
+                {["all", "todo", "in-progress", "completed"].map((status) => (
+                  <button
+                    key={status}
+                    className={`btn ${
+                      filter === status ? "btn-primary" : "btn-outline-secondary"
+                    } text-capitalize w-100 hover-effect`}
+                    onClick={() => setFilter(status)}
+                  >
+                    {status.replace("-", " ")}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
 
-          <div className="col-lg-9 col-md-8 main-content">
-            <div className="d-flex justify-content-between align-items-center mb-4">
-              <h4 className="mb-0 fw-bold">My Tasks</h4>
-              <Button variant="navbar" onClick={handleAddNewTask}>
-                <i className="bi bi-plus-lg me-2"></i>Add New Task
-              </Button>
-            </div>
-
+          <div className="col-md-9">
             <DragDropContext onDragEnd={handleDragEnd}>
               <Droppable droppableId="tasks">
                 {(provided) => (
                   <div 
-                    className="row g-4" 
+                    className="tasks-grid" 
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
@@ -108,12 +113,11 @@ const Tasks = () => {
                       >
                         {(provided) => (
                           <div 
-                            className="col-xl-6 col-xxl-4 col-md-12"
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            <div className="task-card bg-white p-4 rounded-3 shadow-sm hover-card h-100">
+                            <div className={`task-card p-4 rounded-3 shadow-sm ${isDarkMode ? 'task-card-dark' : ''}`}>
                               <div className="d-flex justify-content-between mb-3">
                                 <span
                                   className={`priority-badge priority-${task.priority}`}
@@ -122,7 +126,7 @@ const Tasks = () => {
                                 </span>
                                 <div className="dropdown">
                                   <button
-                                    className="btn btn-link text-dark p-0"
+                                    className="btn btn-link p-0 task-menu-btn"
                                     type="button"
                                     data-bs-toggle="dropdown"
                                   >
@@ -169,7 +173,7 @@ const Tasks = () => {
           </div>
         </div>
       </div>
-    </>
+    </PageLayout>
   );
 };
 

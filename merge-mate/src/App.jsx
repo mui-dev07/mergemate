@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import Navbar from "./components/Navbar";
 import Login from "./pages/login/Login";
@@ -21,46 +21,61 @@ import Profile from "./pages/profile/Profile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import "./styles/toast.css";
+import "./styles/global.css";
 import NewTask from "./pages/tasks/NewTask";
 import GitHubCallback from "./components/GitHubCallback";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Set isAuthenticated to true by default for development/testing
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+
+  useEffect(() => {
+    // Check if user is on login page
+    const isLoginPage = window.location.pathname === '/login';
+    
+    // If on login page, don't auto-authenticate
+    if (isLoginPage) {
+      setIsAuthenticated(false);
+    }
+  }, []);
 
   return (
     <HelmetProvider>
-      <Router>
-        <div className="min-vh-100 bg-light">
-          <Navbar
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-          />
-          <ToastContainer
-            position="bottom-right"
-            autoClose={3000}
-            limit={1}
-            closeButton={true}
-            closeOnClick={true}
-            className="toast-container"
-          />
-          <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" />} />
-            <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path="/github/callback" element={<GitHubCallback />} />
-            <Route path="/overview" element={<Overview />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/discover" element={<Discover />} />
-            <Route path="/tasks" element={<Tasks />} />
-            <Route path="/contributions" element={<Contributions />} />
-            <Route path="/notifications" element={<Notifications />} />
-            <Route path="/add-project" element={<AddProject />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contributors" element={<Contributors />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/tasks/new" element={<NewTask />} />
-          </Routes>
-        </div>
-      </Router>
+      <ThemeProvider>
+        <Router>
+          <div className="min-vh-100">
+            <Navbar
+              isAuthenticated={isAuthenticated}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+            <ToastContainer
+              position="bottom-right"
+              autoClose={3000}
+              limit={1}
+              closeButton={true}
+              closeOnClick={true}
+              className="toast-container"
+            />
+            <Routes>
+              <Route path="/" element={<Navigate to="/dashboard" />} />
+              <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+              <Route path="/github/callback" element={<GitHubCallback />} />
+              <Route path="/overview" element={<Overview />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/discover" element={<Discover />} />
+              <Route path="/tasks" element={<Tasks />} />
+              <Route path="/contributions" element={<Contributions />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/add-project" element={<AddProject />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/contributors" element={<Contributors />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/tasks/new" element={<NewTask />} />
+            </Routes>
+          </div>
+        </Router>
+      </ThemeProvider>
     </HelmetProvider>
   );
 }

@@ -1,21 +1,57 @@
+.contributions-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .stat-card {
+  background-color: var(--surface);
+  border-color: var(--border);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card h6 {
+  color: var(--text);
+}
+
+.stat-card h3 {
+  color: var(--text);
+}
+
+.content-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.section-title {
+  color: var(--primary);
+  font-weight: 600;
 }
 
 .contribution-card {
+  position: relative;
   transition: all 0.3s ease;
-  background-color: white;
+  background-color: var(--surface);
+  border-color: var(--border) !important;
 }
 
 .contribution-card:hover {
   transform: translateX(5px);
-  border-left: 4px solid #0d6efd !important;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--primary) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+.contribution-title {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.text-muted {
+  color: var(--textSecondary) !important;
 }
 
 .reviewers-stack {
@@ -27,7 +63,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid var(--surface);
   margin-left: -10px;
   transition: transform 0.2s ease;
 }
@@ -43,7 +79,7 @@
 
 .hover-effect:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15) !important;
+  box-shadow: var(--shadow-sm);
 }
 
 .badge {
@@ -59,11 +95,23 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, transparent, rgba(13, 110, 253, 0.03));
+  background: linear-gradient(45deg, transparent, rgba(var(--primary-rgb), 0.03));
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .contribution-card:hover::before {
   opacity: 1;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .contributions-list {
+    margin-top: 1rem;
+  }
+  
+  .contribution-card {
+    padding: 1rem;
+  }
 } 

@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../../styles/Projects.css";
+import PageLayout from "../../components/PageLayout";
+import { useTheme } from "../../context/ThemeContext";
 
 const Projects = () => {
+  const { isDarkMode } = useTheme();
   const [projects, setProjects] = useState([
     // Dummy data - replace with your actual data
 
@@ -105,45 +108,71 @@ const Projects = () => {
     // Add more projects as needed
   ]);
 
+  // Projects header component
+  const ProjectsHeader = (
+    <div className="d-flex flex-wrap justify-content-between align-items-center mb-4">
+      <h2 className="mb-0">My Projects</h2>
+      <button className="btn btn-primary mt-2 mt-md-0">
+        <i className="bi bi-plus-circle me-2"></i>
+        Add New Project
+      </button>
+    </div>
+  );
+
   return (
-    <div className="container-fluid projects-container py-5">
-      <h1 className="text-center mb-5 projects-title">My Projects</h1>
-      <div className="row g-4">
-        {projects.map((project) => (
-          <div key={project.id} className="col-12 col-md-6 col-lg-4">
-            <div className="project-card h-100">
-              <div className="project-status-badge">{project.status}</div>
-              <div className="card-body">
-                <h5 className="project-title">{project.title}</h5>
-                <p className="project-description">{project.description}</p>
-                <div className="tech-stack">
-                  {project.tech.map((tech, index) => (
-                    <span key={index} className="tech-badge">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="progress-wrapper">
-                  <div className="progress-label">Progress</div>
-                  <div className="progress">
-                    <div
-                      className="progress-bar"
-                      role="progressbar"
-                      style={{ width: `${project.progress}%` }}
-                      aria-valuenow={project.progress}
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    >
-                      {project.progress}%
+    <PageLayout 
+      title="Projects" 
+      description="Manage your MergeMate projects"
+      header={ProjectsHeader}
+      className="projects-page"
+    >
+      <div className="projects-container animate-fade-in">
+        <div className="row g-4">
+          {projects.map((project) => (
+            <div key={project.id} className="col-12 col-md-6 col-lg-4">
+              <div className={`project-card h-100 animate-slide-up ${isDarkMode ? 'project-card-dark' : ''}`}>
+                <div className={`project-status-badge status-${project.status.toLowerCase().replace(/\s+/g, '-')}`}>{project.status}</div>
+                <div className="card-body p-4">
+                  <h5 className="project-title">{project.title}</h5>
+                  <p className="project-description">{project.description}</p>
+                  <div className="tech-stack">
+                    {project.tech.map((tech, index) => (
+                      <span key={index} className="tech-badge">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="progress-wrapper mt-4">
+                    <div className="d-flex justify-content-between mb-2">
+                      <div className="progress-label">Progress</div>
+                      <div className="progress-value">{project.progress}%</div>
                     </div>
+                    <div className="progress" style={{ height: "8px" }}>
+                      <div
+                        className={`progress-bar bg-${project.progress === 100 ? 'success' : project.progress > 50 ? 'primary' : 'warning'}`}
+                        role="progressbar"
+                        style={{ width: `${project.progress}%` }}
+                        aria-valuenow={project.progress}
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                  <div className="mt-4 d-flex justify-content-between">
+                    <button className="btn btn-sm btn-outline-primary">
+                      <i className="bi bi-eye me-1"></i> View
+                    </button>
+                    <button className="btn btn-sm btn-outline-secondary">
+                      <i className="bi bi-gear me-1"></i> Settings
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

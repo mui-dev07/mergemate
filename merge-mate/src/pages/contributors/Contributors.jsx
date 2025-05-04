@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/Contributors.css";
 import Button from "../../components/Button";
+import PageLayout from "../../components/PageLayout";
 
 const Contributors = () => {
   // Mock data - replace with actual API data later
@@ -48,31 +49,37 @@ const Contributors = () => {
     
   ]);
 
-  return (
-    <div className="container-fluid bg-light min-vh-100 mt-5">
-      <div className="contributors-container p-4">
-        {/* Header Section */}
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <div>
-            <h4 className="fw-bold mb-1">Project Contributors</h4>
-            <p className="text-muted mb-0">Manage and view project contributors</p>
-          </div>
-          
-          <Button variant="navbar">
-            <i className="bi bi-plus-lg me-2"></i>
-            Invite Contributor
-          </Button>
-        </div>
+  // Header component
+  const ContributorsHeader = (
+    <div className="d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div>
+        <h2 className="mb-1">Project Contributors</h2>
+        <p className="text-muted mb-0">Manage and view project contributors</p>
+      </div>
+      
+      <Button variant="primary">
+        <i className="bi bi-plus-lg me-2"></i>
+        Invite Contributor
+      </Button>
+    </div>
+  );
 
+  return (
+    <PageLayout
+      title="Contributors"
+      description="Manage and view project contributors"
+      header={ContributorsHeader}
+    >
+      <div className="contributors-container">
         {/* Stats Cards */}
-        <div className="row g-4 mb-4 text-center justify-content-center">
+        <div className="row g-3 g-md-4 mb-4 text-center justify-content-center">
           {[
             { label: "Total Contributors", value: "24", icon: "bi-people-fill" },
             { label: "Active This Week", value: "18", icon: "bi-person-check-fill" },
             { label: "Pending Invites", value: "3", icon: "bi-envelope" },
           ].map((stat, index) => (
             <div key={index} className="col-md-4">
-              <div className="stat-card border rounded-3 p-4 bg-white shadow-sm text-center">
+              <div className="stat-card border rounded-3 p-3 p-md-4 shadow-sm text-center">
                 <div className="d-flex align-items-center">
                   <div className="stat-icon-wrapper me-3 d-flex align-items-center pt-2">
                     <i className={`bi ${stat.icon}`}></i>
@@ -88,7 +95,7 @@ const Contributors = () => {
         </div>
 
         {/* Contributors List */}
-        <div className="bg-white rounded-3 shadow-sm p-4">
+        <div className="content-card rounded-3 shadow-sm p-3 p-md-4">
           <div className="contributors-grid">
             {contributors.map((contributor) => (
               <div key={contributor.id} className="contributor-card">
@@ -136,7 +143,7 @@ const Contributors = () => {
           </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

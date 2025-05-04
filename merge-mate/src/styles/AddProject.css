@@ -1,70 +1,68 @@
 .add-project-container {
   min-height: 80vh;
-  background: linear-gradient(135deg, #f4f5f7 0%, #e9ecef 100%);
+  background-color: var(--background);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .project-card {
-  border-radius: 1rem;
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
   transition: all 0.3s ease;
   max-width: 1000px;
   margin: 0 auto;
+  background-color: var(--surface);
+  border-color: var(--border) !important;
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
 }
 
-.project-title {
+.form-section-title {
   font-weight: 700;
-  color: #343a40;
+  color: var(--primary);
   position: relative;
   padding-bottom: 8px;
   font-size: 1.5rem;
   margin-bottom: 1.5rem !important;
 }
 
-.project-title::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background-color: #343a40;
-}
-
 .form-label {
   font-weight: 600;
-  color: #495057;
-  margin-bottom: 0.25rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
   font-size: 0.9rem;
 }
 
 .sleek-input {
   border: none;
-  border-bottom: 2px solid #ced4da;
+  border-bottom: 2px solid var(--border);
   border-radius: 0;
   padding: 0.5rem 0;
   transition: all 0.3s ease;
   box-shadow: none;
   font-size: 0.9rem;
+  background-color: transparent;
+  color: var(--text);
 }
 
 .sleek-input:focus {
-  border-color: #343a40;
+  border-color: var(--primary);
   box-shadow: none;
+  background-color: transparent;
+  color: var(--text);
+}
+
+.sleek-input::placeholder {
+  color: var(--textSecondary);
+  opacity: 0.7;
 }
 
 .submit-btn {
-  background-color: #343a40;
-  border: none;
   padding: 0.75rem;
   font-weight: 600;
   letter-spacing: 1px;
@@ -73,25 +71,26 @@
 }
 
 .submit-btn:hover {
-  background-color: #212529;
   transform: translateY(-3px);
-  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
-}
-
-.project-preview {
-  max-height: 150px;
-  object-fit: cover;
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .img-bg {
   min-height: 300px;
   cursor: pointer;
+  background-color: rgba(var(--primary-rgb), 0.1);
 }
 
 .img-bg:hover {
   opacity: 0.9;
+}
+
+.upload-placeholder {
+  color: var(--text);
+}
+
+.upload-placeholder i {
+  color: var(--primary);
 }
 
 .project-preview-horizontal {
@@ -107,11 +106,20 @@
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .project-card {
-    margin: 1rem;
+    margin: 0 0.5rem;
+  }
+
+  .img-bg {
+    min-height: 200px;
   }
 
   .card-body {
-    padding: 2rem !important;
+    padding: 0 !important;
+  }
+  
+  .form-section-title {
+    text-align: center;
+    font-size: 1.25rem;
   }
 }
 
@@ -126,7 +134,6 @@
     transform: translateY(0);
   }
 }
-
 
 .add-project-form > .form-group {
   animation: fadeInUp 0.6s ease forwards;

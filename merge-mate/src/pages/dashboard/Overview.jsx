@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import "../../styles/Overview.css";
+import PageLayout from '../../components/PageLayout';
 
 const Overview = () => {
   const contributionData = [
@@ -14,12 +15,20 @@ const Overview = () => {
     { day: 'Sun', count: 2 },
   ];
 
+  // Overview header component
+  const OverviewHeader = (
+    <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
+      <h2 className="mb-0">Dashboard Overview</h2>
+    </div>
+  );
+
   return (
-    <>
-      <Helmet>
-        <title>Dashboard Overview | MergeMate</title>
-      </Helmet>
-      <div className="overview-container mt-5">
+    <PageLayout 
+      title="Overview" 
+      description="Your MergeMate dashboard overview"
+      header={OverviewHeader}
+    >
+      <div className="overview-container">
         {/* Hero Section */}
         <motion.div 
           className="hero-section"
@@ -100,7 +109,7 @@ const Overview = () => {
           </div>
         </div>
       </div>
-    </>
+    </PageLayout>
   );
 };
 

@@ -1,71 +1,217 @@
 .notifications-container {
-  background-color: white;
-  border-radius: 1rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  margin-top: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .notification-card {
   display: flex;
   align-items: center;
   padding: 1.25rem;
-  border-radius: 0.75rem;
-  margin-bottom: 1rem;
-  background-color: white;
+  border-radius: var(--border-radius-md);
+  background-color: var(--surface);
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .notification-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
 }
 
 .notification-card.unread {
-  background-color: #f8f9fa;
-  border-left: 4px solid #0d6efd;
+  background-color: rgba(var(--primary-rgb), 0.05);
+  border-left: 4px solid var(--primary);
+}
+
+.notification-card.read {
+  opacity: 0.85;
 }
 
 .notification-icon {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background-color: #e7f1ff;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.notification-icon.mention-bg {
+  background-color: rgba(var(--info-rgb), 0.2);
+}
+
+.notification-icon.review-bg {
+  background-color: rgba(var(--success-rgb), 0.2);
+}
+
+.notification-icon.task-bg {
+  background-color: rgba(var(--warning-rgb), 0.2);
+}
+
+.notification-icon.default-bg {
+  background-color: rgba(var(--primary-rgb), 0.2);
 }
 
 .notification-icon i {
   font-size: 1.25rem;
-  color: #0d6efd;
+  color: var(--primary);
+}
+
+.mention-bg i {
+  color: var(--info);
+}
+
+.review-bg i {
+  color: var(--success);
+}
+
+.task-bg i {
+  color: var(--warning);
 }
 
 .notification-content {
   flex: 1;
+  min-width: 0; /* Helps with text truncation */
 }
 
 .notification-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.notification-header h6 {
+  color: var(--text);
+  font-weight: 600;
+  margin-right: 1rem;
 }
 
 .notification-time {
   font-size: 0.875rem;
-  color: #6c757d;
+  color: var(--textSecondary);
+  white-space: nowrap;
+}
+
+.notification-content p {
+  margin-bottom: 0;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .unread-indicator {
-  width: 8px;
-  height: 8px;
-  background-color: #0d6efd;
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary);
   border-radius: 50%;
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
+  animation: pulse 1.5s infinite;
+}
+
+.empty-state {
+  padding: 3rem;
+  text-align: center;
+  background-color: var(--surface);
+  border-radius: var(--border-radius-md);
+  border: 1px dashed var(--border);
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: var(--textSecondary);
+  margin-bottom: 1rem;
+}
+
+.empty-state h5 {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: var(--textSecondary);
+}
+
+/* Animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(var(--primary-rgb), 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .notification-card {
+    padding: 1rem;
+  }
+  
+  .notification-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .notification-header {
+    margin-bottom: 0.25rem;
+  }
+  
+  .notification-header h6 {
+    font-size: 0.95rem;
+  }
+  
+  .notification-time {
+    font-size: 0.8rem;
+  }
+  
+  .notification-content p {
+    font-size: 0.9rem;
+  }
+  
+  .unread-indicator {
+    width: 8px;
+    height: 8px;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .notification-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .notification-icon {
+    margin-bottom: 0.75rem;
+    margin-right: 0;
+  }
+  
+  .notification-header {
+    width: 100%;
+  }
 } 

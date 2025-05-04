@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from 'react-helmet-async';
 import { GITHUB_CLIENT_ID } from '../../config/constants';
 import { authenticateWithGithub, initiateGithubLogin } from '../../api/auth';
 import Session from '../../utils/session';
 import "../../styles/Login.css";
+import PageLayout from "../../components/PageLayout";
 
 function Login({ setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -24,14 +24,13 @@ function Login({ setIsAuthenticated }) {
 
     if (code) {
       handleGithubCallback(code);
-      // Move URL cleanup to after successful authentication
     }
   }, []);
 
   const handleGithubCallback = async (code) => {
     try {
       const response = await authenticateWithGithub(code);
-      if (response && response.token) {  // Add null check
+      if (response && response.token) {
         // Store user data first
         Session.setUser(response.user);
         localStorage.setItem('accessToken', response.token);
@@ -62,37 +61,41 @@ function Login({ setIsAuthenticated }) {
     navigate('/dashboard');
   };
 
-  console.log('GitHub Client ID:', GITHUB_CLIENT_ID);
-
   return (
-    <>
-      <Helmet>
-        <title>Login | MergeMate</title>
-      </Helmet>
-      <div className="login-container">
-        <div className="login-box">
-          <div className="login-header">
-            <i className="bi bi-github"></i>
-            <h1>Sign in to MergeMate</h1>
+    <PageLayout 
+      title="Login" 
+      description="Sign in to MergeMate"
+      className="login-page"
+    >
+      <div className="login-box animate-fade-in">
+        <div className="login-card">
+          <div className="logo-container">
+            <div className="logo-icon">
+              <i className="bi bi-git"></i>
+            </div>
           </div>
-          <div className="login-form-container">
+          <h1 className="login-title">Sign in to MergeMate</h1>
+          <div className="login-buttons">
             <button 
               onClick={handleGithubLogin}
-              className="github-sign-in-btn"
+              className="github-btn"
             >
               <i className="bi bi-github"></i>
               Continue with GitHub
             </button>
+            <div className="divider">
+              <span>or</span>
+            </div>
             <button 
               onClick={handleContinueWithoutGithub}
-              className="continue-without-github-btn"
+              className="normal-btn"
             >
               Continue without GitHub
             </button>
           </div>
         </div>
       </div>
-    </>
+    </PageLayout>
   );
 }
 

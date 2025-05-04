@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
-import { Helmet } from 'react-helmet-async';
+import PageLayout from '../../components/PageLayout';
+import { useTheme } from '../../context/ThemeContext';
 
 const NewTask = () => {
   const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
+  
   const [formData, setFormData] = useState({
     techStack: '',
     difficulty: '',
@@ -41,22 +44,30 @@ const NewTask = () => {
     });
   };
 
+  // New Task header component
+  const NewTaskHeader = (
+    <div className="d-flex flex-wrap justify-content-between align-items-center mb-4">
+      <h2 className="mb-0">Create New Task</h2>
+    </div>
+  );
+
   return (
-    <>
-      <Helmet>
-        <title>New Task | MergeMate</title>
-      </Helmet>
-      <div className="container py-4 mt-5">
+    <PageLayout
+      title="New Task"
+      description="Create a new task in MergeMate"
+      header={NewTaskHeader}
+      className="new-task-page"
+    >
+      <div className="new-task-container animate-fade-in">
         <div className="row justify-content-center">
-          <div className="col-md-8 col-lg-6">
-            <div className="card border-0 shadow-sm rounded-3">
-              <div className="card-body p-4">
-                <h4 className="text-center mb-4 fw-bold text-primary">Create New Task</h4>
+          <div className="col-lg-8 col-xl-6">
+            <div className={`card rounded-3 shadow-sm border ${isDarkMode ? 'new-task-card-dark' : ''}`}>
+              <div className="card-body p-4 p-md-5">
                 <form onSubmit={handleSubmit} className="needs-validation">
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <label className="form-label fw-semibold">Tech Stack</label>
                     <select 
-                      className="form-select shadow-none border-secondary-subtle"
+                      className="form-select"
                       name="techStack"
                       value={formData.techStack}
                       onChange={handleChange}
@@ -69,10 +80,10 @@ const NewTask = () => {
                     </select>
                   </div>
 
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <label className="form-label fw-semibold">Difficulty</label>
                     <select 
-                      className="form-select shadow-none border-secondary-subtle"
+                      className="form-select"
                       name="difficulty"
                       value={formData.difficulty}
                       onChange={handleChange}
@@ -87,14 +98,15 @@ const NewTask = () => {
                     </select>
                   </div>
 
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <label className="form-label fw-semibold">Title</label>
                     <input
                       type="text"
-                      className="form-control shadow-none border-secondary-subtle"
+                      className="form-control"
                       name="title"
                       value={formData.title}
                       onChange={handleChange}
+                      placeholder="Enter task title"
                       required
                     />
                   </div>
@@ -102,29 +114,32 @@ const NewTask = () => {
                   <div className="mb-4">
                     <label className="form-label fw-semibold">Description</label>
                     <textarea
-                      className="form-control shadow-none border-secondary-subtle"
+                      className="form-control"
                       name="description"
                       value={formData.description}
                       onChange={handleChange}
                       rows="4"
+                      placeholder="Describe the task in detail"
                       required
                     ></textarea>
                   </div>
 
-                  <div className="d-flex gap-2 justify-content-center">
+                  <div className="d-flex gap-3 justify-content-center">
                     <Button 
                       type="submit" 
-                      variant="navbar"
+                      variant="primary"
                       className="px-4 py-2"
                     >
+                      <i className="bi bi-check-circle me-2"></i>
                       Create Task
                     </Button>
                     <Button 
                       type="button" 
-                      variant="outline-dark"
+                      variant="outline-secondary"
                       onClick={() => navigate('/tasks')}
                       className="px-4 py-2"
                     >
+                      <i className="bi bi-x-circle me-2"></i>
                       Cancel
                     </Button>
                   </div>
@@ -134,31 +149,7 @@ const NewTask = () => {
           </div>
         </div>
       </div>
-
-      <style>
-        {`
-          .form-control:focus,
-          .form-select:focus {
-            border-color: #86b7fe;
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
-          }
-          
-          .card {
-            transition: all 0.3s ease;
-          }
-          
-          .card:hover {
-            transform: translateY(-2px);
-          }
-          
-          @media (max-width: 768px) {
-            .container {
-              padding: 1rem;
-            }
-          }
-        `}
-      </style>
-    </>
+    </PageLayout>
   );
 };
 
