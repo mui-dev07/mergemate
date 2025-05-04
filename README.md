@@ -26,6 +26,7 @@ The application features a modern, responsive UI built with React, with a planne
 ## Features
 
 ### For Contributors
+
 - **Project Discovery**: Find open source projects that match your skills and interests
 - **Task Management**: View, select, and track tasks assigned to you
 - **Contribution Tracking**: Monitor your contributions across different projects
@@ -33,6 +34,7 @@ The application features a modern, responsive UI built with React, with a planne
 - **Notifications**: Stay updated on project activities
 
 ### For Project Owners
+
 - **Project Management**: Create and manage open source projects
 - **Task Creation**: Create tasks and assign them to contributors
 - **Contributor Management**: View and manage contributors to your projects
@@ -41,12 +43,14 @@ The application features a modern, responsive UI built with React, with a planne
 ## Technology Stack
 
 ### Frontend
+
 - **React**: UI library for building the interface
 - **React Router**: For navigation
 - **Bootstrap & Custom CSS**: For styling
 - **Context API**: For state management
 
 ### Backend (Planned Implementation)
+
 - **Node.js**: Runtime environment
 - **Express**: Web framework
 - **MongoDB**: Database
@@ -87,6 +91,7 @@ merge-mate/
 For the MongoDB implementation, the following collections are recommended:
 
 ### Users Collection
+
 ```javascript
 {
   _id: ObjectId,
@@ -104,6 +109,7 @@ For the MongoDB implementation, the following collections are recommended:
 ```
 
 ### Projects Collection
+
 ```javascript
 {
   _id: ObjectId,
@@ -127,6 +133,7 @@ For the MongoDB implementation, the following collections are recommended:
 ```
 
 ### Tasks Collection
+
 ```javascript
 {
   _id: ObjectId,
@@ -146,6 +153,7 @@ For the MongoDB implementation, the following collections are recommended:
 ```
 
 ### Contributions Collection
+
 ```javascript
 {
   _id: ObjectId,
@@ -162,6 +170,7 @@ For the MongoDB implementation, the following collections are recommended:
 ```
 
 ### Notifications Collection
+
 ```javascript
 {
   _id: ObjectId,
@@ -179,12 +188,14 @@ For the MongoDB implementation, the following collections are recommended:
 The following API endpoints will be needed to support the frontend:
 
 ### Authentication
+
 - `POST /api/auth/github` - Authenticate with GitHub
 - `GET /api/auth/github/callback` - GitHub OAuth callback
 - `POST /api/auth/logout` - Logout user
 - `GET /api/user` - Get authenticated user
 
 ### Users
+
 - `GET /api/users/:id` - Get user profile
 - `PUT /api/users/:id` - Update user profile
 - `GET /api/users/:id/projects` - Get user's projects
@@ -192,6 +203,7 @@ The following API endpoints will be needed to support the frontend:
 - `GET /api/users/:id/contributions` - Get user's contributions
 
 ### Projects
+
 - `GET /api/projects` - Get all projects
 - `POST /api/projects` - Create a new project
 - `GET /api/projects/:id` - Get project details
@@ -202,6 +214,7 @@ The following API endpoints will be needed to support the frontend:
 - `POST /api/projects/:id/contributors` - Add contributor to project
 
 ### Tasks
+
 - `GET /api/tasks` - Get all tasks
 - `POST /api/tasks` - Create a new task
 - `GET /api/tasks/:id` - Get task details
@@ -210,12 +223,14 @@ The following API endpoints will be needed to support the frontend:
 - `PUT /api/tasks/:id/status` - Update task status
 
 ### Contributions
+
 - `GET /api/contributions` - Get all contributions
 - `POST /api/contributions` - Create a new contribution
 - `GET /api/contributions/:id` - Get contribution details
 - `PUT /api/contributions/:id` - Update contribution
 
 ### Notifications
+
 - `GET /api/notifications` - Get user notifications
 - `PUT /api/notifications/:id` - Mark notification as read
 - `PUT /api/notifications/read-all` - Mark all notifications as read
@@ -235,6 +250,7 @@ MergeMate uses GitHub OAuth for authentication. The authentication flow is as fo
 9. User is authenticated
 
 ### Implementation Notes
+
 - Use passport.js with passport-github2 strategy
 - Implement JWT token generation and verification
 - Store GitHub access token securely to make API calls on behalf of the user
@@ -242,11 +258,13 @@ MergeMate uses GitHub OAuth for authentication. The authentication flow is as fo
 ## Installation
 
 ### Prerequisites
+
 - Node.js (v14 or later)
 - npm or yarn
 - MongoDB (v4 or later)
 
 ### Frontend Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/your-username/mergemate.git
@@ -266,6 +284,7 @@ npm run dev
 ```
 
 ### Backend Setup (After Implementation)
+
 ```bash
 # Navigate to backend directory
 cd backend
@@ -284,6 +303,7 @@ npm run dev
 ## Development
 
 ### Frontend Development
+
 ```bash
 # Start development server
 npm run dev
@@ -296,6 +316,7 @@ npm run preview
 ```
 
 ### Backend Development (After Implementation)
+
 ```bash
 # Start development server
 npm run dev
@@ -310,17 +331,21 @@ npm run debug
 ## Deployment
 
 ### Deployment Options
+
 - **Frontend**: Vercel, Netlify, GitHub Pages
 - **Backend**: Heroku, DigitalOcean, AWS, Render
 
 ### Environment Variables
+
 The following environment variables need to be set in production:
 
 #### Frontend
+
 - `VITE_API_URL` - URL of the backend API
 - `VITE_GITHUB_CLIENT_ID` - GitHub OAuth client ID
 
 #### Backend
+
 - `PORT` - Port to run the server on
 - `MONGODB_URI` - MongoDB connection string
 - `JWT_SECRET` - Secret for JWT signing
@@ -340,4 +365,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Contact
 
-For any questions or suggestions, please reach out to [your-email@example.com](mailto:your-email@example.com).
+For any questions or suggestions, please reach out to [mujtaba.ahmed.232004@gmail.com](mailto:mujtaba.ahmed.232004@gmail.com).
