@@ -1,74 +1,343 @@
-# 🚀 MergeMate: Streamline Your GitHub Workflow
+# MergeMate
 
-![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
-![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-4.x-3178C6?logo=typescript)
+A modern platform for open source contribution management and collaboration. MergeMate helps developers discover projects, manage tasks, track contributions, and collaborate more effectively.
 
-## 📖 Overview
+![MergeMate Banner](https://i.imgur.com/placeholder.png)
 
-MergeMate is a powerful GitHub collaboration tool designed to enhance team productivity and streamline pull request management. Built with modern web technologies, it provides an intuitive interface for developers to manage, review, and merge code efficiently.
+## Table of Contents
 
-## 🌟 Key Features
+- [Overview](#overview)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [Database Design](#database-design)
+- [API Endpoints](#api-endpoints)
+- [Authentication](#authentication)
+- [Installation](#installation)
+- [Development](#development)
+- [Deployment](#deployment)
 
-### 📱 Responsive Design
-- **Mobile-First Approach**: Seamless experience across all devices
-  - 💻 Desktop optimization
-  - 📱 Tablet-friendly interfaces
-  - 🤳 Mobile responsiveness
+## Overview
 
-### 🔄 State Management
-- **Advanced State Handling**:
-  - 🌐 Global state management with React Context
-  - 🧩 Granular local component state
-  - 🔧 Custom hooks for modular logic
+MergeMate is a comprehensive platform designed to streamline the open source contribution process. It connects project owners with contributors, provides tools for task management, and creates a seamless experience for open source collaboration.
 
-### 🌐 API Integration
-- **Robust Backend Communication**:
-  - 🔌 RESTful API interactions
-  - 🛡️ Axios interceptors for request/response handling
-  - 🚨 Comprehensive error management
-  - 🔐 Secure authentication token handling
+The application features a modern, responsive UI built with React, with a planned backend implementation using Node.js and MongoDB.
 
-## 🎯 Roadmap & Future Enhancements
+## Features
 
-- [ ] 💬 Real-time team communication
-- [ ] 📊 Advanced analytics dashboard
-- [ ] 🤖 Custom workflow automation
-- [ ] 🔗 Enhanced GitHub integration
-- [ ] 👥 Team collaboration tools
+### For Contributors
+- **Project Discovery**: Find open source projects that match your skills and interests
+- **Task Management**: View, select, and track tasks assigned to you
+- **Contribution Tracking**: Monitor your contributions across different projects
+- **Profile Management**: Showcase your skills and contributions
+- **Notifications**: Stay updated on project activities
 
-## 🛠 Tech Stack
+### For Project Owners
+- **Project Management**: Create and manage open source projects
+- **Task Creation**: Create tasks and assign them to contributors
+- **Contributor Management**: View and manage contributors to your projects
+- **Progress Tracking**: Monitor the progress of your projects
 
-![Tech Stack](https://skillicons.dev/icons?i=react,typescript,github,nodejs,tailwind)
+## Technology Stack
 
-- **Frontend**: React.js
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **State Management**: React Context
-- **HTTP Client**: Axios
+### Frontend
+- **React**: UI library for building the interface
+- **React Router**: For navigation
+- **Bootstrap & Custom CSS**: For styling
+- **Context API**: For state management
 
-## 📦 Getting Started
+### Backend (Planned Implementation)
+- **Node.js**: Runtime environment
+- **Express**: Web framework
+- **MongoDB**: Database
+- **Mongoose**: ODM for MongoDB
+- **JWT**: For authentication
 
-### Prerequisites
-- Node.js 16+
-- npm 8+
+## Project Structure
 
-### Installation
-```bash
-git clone https://github.com/yourusername/mergemate.git
-cd mergemate
-npm install
-npm start
+The frontend is organized into the following structure:
+
+```
+merge-mate/
+├── public/
+└── src/
+    ├── api/                # API calls
+    ├── components/         # Reusable components
+    ├── config/             # Configuration files
+    ├── context/            # Context providers
+    ├── pages/              # Page components
+    │   ├── add-project/    # Add project page
+    │   ├── contributors/   # Contributors page
+    │   ├── contributions/  # Contributions page
+    │   ├── dashboard/      # Dashboard pages
+    │   ├── discover/       # Discover projects page
+    │   ├── login/          # Authentication pages
+    │   ├── notifications/  # Notifications page
+    │   ├── profile/        # User profile page
+    │   ├── projects/       # Projects management
+    │   └── tasks/          # Task management
+    ├── styles/             # CSS styles
+    ├── utils/              # Utility functions
+    ├── App.jsx             # Main application component
+    └── main.jsx            # Application entry point
 ```
 
-## 📄 License
+## Database Design
 
-Distributed under the MIT License. See `LICENSE` for more information.
+For the MongoDB implementation, the following collections are recommended:
+
+### Users Collection
+```javascript
+{
+  _id: ObjectId,
+  githubId: String,       // ID from GitHub OAuth
+  username: String,
+  email: String,
+  displayName: String,
+  avatar: String,         // URL to profile image
+  bio: String,
+  skills: [String],       // Array of skills
+  role: String,           // 'contributor' or 'owner'
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+### Projects Collection
+```javascript
+{
+  _id: ObjectId,
+  title: String,
+  description: String,
+  owner: ObjectId,        // Reference to User
+  status: String,         // 'In Progress', 'Completed', 'Planned'
+  techStack: [String],    // Array of technologies used
+  progress: Number,       // Percentage complete (0-100)
+  contributors: [         // Array of contributor references
+    {
+      user: ObjectId,     // Reference to User
+      role: String,       // Role in the project
+      joinedAt: Date
+    }
+  ],
+  stars: Number,          // Number of stars/likes
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+### Tasks Collection
+```javascript
+{
+  _id: ObjectId,
+  title: String,
+  description: String,
+  project: ObjectId,      // Reference to Project
+  assignedTo: ObjectId,   // Reference to User
+  createdBy: ObjectId,    // Reference to User
+  status: String,         // 'todo', 'in-progress', 'completed'
+  priority: String,       // 'low', 'medium', 'high'
+  dueDate: Date,
+  techStack: String,      // Primary technology for the task
+  difficulty: String,     // 'beginner', 'intermediate', 'advanced'
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+### Contributions Collection
+```javascript
+{
+  _id: ObjectId,
+  user: ObjectId,         // Reference to User
+  project: ObjectId,      // Reference to Project
+  task: ObjectId,         // Reference to Task
+  type: String,           // 'code', 'documentation', 'review', etc.
+  description: String,
+  pullRequestUrl: String, // GitHub PR URL
+  status: String,         // 'submitted', 'accepted', 'rejected'
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+### Notifications Collection
+```javascript
+{
+  _id: ObjectId,
+  recipient: ObjectId,    // Reference to User
+  type: String,           // 'mention', 'review', 'task', etc.
+  content: String,
+  project: ObjectId,      // Reference to Project
+  read: Boolean,
+  createdAt: Date
+}
+```
+
+## API Endpoints
+
+The following API endpoints will be needed to support the frontend:
+
+### Authentication
+- `POST /api/auth/github` - Authenticate with GitHub
+- `GET /api/auth/github/callback` - GitHub OAuth callback
+- `POST /api/auth/logout` - Logout user
+- `GET /api/user` - Get authenticated user
+
+### Users
+- `GET /api/users/:id` - Get user profile
+- `PUT /api/users/:id` - Update user profile
+- `GET /api/users/:id/projects` - Get user's projects
+- `GET /api/users/:id/tasks` - Get user's tasks
+- `GET /api/users/:id/contributions` - Get user's contributions
+
+### Projects
+- `GET /api/projects` - Get all projects
+- `POST /api/projects` - Create a new project
+- `GET /api/projects/:id` - Get project details
+- `PUT /api/projects/:id` - Update project
+- `DELETE /api/projects/:id` - Delete project
+- `GET /api/projects/:id/tasks` - Get project tasks
+- `GET /api/projects/:id/contributors` - Get project contributors
+- `POST /api/projects/:id/contributors` - Add contributor to project
+
+### Tasks
+- `GET /api/tasks` - Get all tasks
+- `POST /api/tasks` - Create a new task
+- `GET /api/tasks/:id` - Get task details
+- `PUT /api/tasks/:id` - Update task
+- `DELETE /api/tasks/:id` - Delete task
+- `PUT /api/tasks/:id/status` - Update task status
+
+### Contributions
+- `GET /api/contributions` - Get all contributions
+- `POST /api/contributions` - Create a new contribution
+- `GET /api/contributions/:id` - Get contribution details
+- `PUT /api/contributions/:id` - Update contribution
+
+### Notifications
+- `GET /api/notifications` - Get user notifications
+- `PUT /api/notifications/:id` - Mark notification as read
+- `PUT /api/notifications/read-all` - Mark all notifications as read
+
+## Authentication
+
+MergeMate uses GitHub OAuth for authentication. The authentication flow is as follows:
+
+1. User clicks "Continue with GitHub" button
+2. User is redirected to GitHub OAuth page
+3. User authorizes the application
+4. GitHub redirects back to MergeMate with a code
+5. Backend exchanges code for access token
+6. Backend creates or updates user in database
+7. Backend returns user data and JWT token
+8. Frontend stores token and user data
+9. User is authenticated
+
+### Implementation Notes
+- Use passport.js with passport-github2 strategy
+- Implement JWT token generation and verification
+- Store GitHub access token securely to make API calls on behalf of the user
+
+## Installation
+
+### Prerequisites
+- Node.js (v14 or later)
+- npm or yarn
+- MongoDB (v4 or later)
+
+### Frontend Setup
+```bash
+# Clone the repository
+git clone https://github.com/your-username/mergemate.git
+
+# Navigate to project directory
+cd mergemate
+
+# Install dependencies
+npm install
+
+# Create .env file with required environment variables
+cp .env.example .env
+# Edit .env file with your configuration
+
+# Start development server
+npm run dev
+```
+
+### Backend Setup (After Implementation)
+```bash
+# Navigate to backend directory
+cd backend
+
+# Install dependencies
+npm install
+
+# Create .env file with required environment variables
+cp .env.example .env
+# Edit .env file with your MongoDB connection string and other config
+
+# Start development server
+npm run dev
+```
+
+## Development
+
+### Frontend Development
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+### Backend Development (After Implementation)
+```bash
+# Start development server
+npm run dev
+
+# Run tests
+npm run test
+
+# Start in debug mode
+npm run debug
+```
+
+## Deployment
+
+### Deployment Options
+- **Frontend**: Vercel, Netlify, GitHub Pages
+- **Backend**: Heroku, DigitalOcean, AWS, Render
+
+### Environment Variables
+The following environment variables need to be set in production:
+
+#### Frontend
+- `VITE_API_URL` - URL of the backend API
+- `VITE_GITHUB_CLIENT_ID` - GitHub OAuth client ID
+
+#### Backend
+- `PORT` - Port to run the server on
+- `MONGODB_URI` - MongoDB connection string
+- `JWT_SECRET` - Secret for JWT signing
+- `GITHUB_CLIENT_ID` - GitHub OAuth client ID
+- `GITHUB_CLIENT_SECRET` - GitHub OAuth client secret
+- `GITHUB_CALLBACK_URL` - GitHub OAuth callback URL
 
 ---
 
-<p align="center">
-  Crafted with 💖 by Mujtaba Ahmed
-  <br>
-  🌟 Star the project if you find it helpful!
-</p>
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Contact
+
+For any questions or suggestions, please reach out to [your-email@example.com](mailto:your-email@example.com).
