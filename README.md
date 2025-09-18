@@ -1,368 +1,345 @@
-# MergeMate
+# MergeMate 🚀
 
-A modern platform for open source contribution management and collaboration. MergeMate helps developers discover projects, manage tasks, track contributions, and collaborate more effectively.
+[![Version](https://img.shields.io/badge/version-0.0.0-blue.svg)](https://github.com/your-username/mergemate)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
+[![PHP](https://img.shields.io/badge/php-%3E%3D8.2-blue.svg)](https://php.net/)
+[![Laravel](https://img.shields.io/badge/laravel-11.31-red.svg)](https://laravel.com/)
 
-![MergeMate Banner](https://i.imgur.com/placeholder.png)
+A modern platform for open source contribution management and collaboration. MergeMate helps developers discover projects, manage tasks, track contributions, and collaborate more effectively in the open source ecosystem.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Database Design](#database-design)
-- [API Endpoints](#api-endpoints)
-- [Authentication](#authentication)
-- [Installation](#installation)
-- [Development](#development)
-- [Deployment](#deployment)
-
-## Overview
-
-MergeMate is a comprehensive platform designed to streamline the open source contribution process. It connects project owners with contributors, provides tools for task management, and creates a seamless experience for open source collaboration.
-
-The application features a modern, responsive UI built with React, with a planned backend implementation using Node.js and MongoDB.
-
-## Features
+## ✨ Features
 
 ### For Contributors
 
 - **Project Discovery**: Find open source projects that match your skills and interests
 - **Task Management**: View, select, and track tasks assigned to you
 - **Contribution Tracking**: Monitor your contributions across different projects
-- **Profile Management**: Showcase your skills and contributions
-- **Notifications**: Stay updated on project activities
+- **Profile Management**: Showcase your skills and contributions with GitHub integration
+- **Real-time Notifications**: Stay updated on project activities and task assignments
 
 ### For Project Owners
 
-- **Project Management**: Create and manage open source projects
-- **Task Creation**: Create tasks and assign them to contributors
+- **Project Management**: Create and manage open source projects with detailed descriptions
+- **Task Creation**: Create tasks with different difficulty levels and assign them to contributors
 - **Contributor Management**: View and manage contributors to your projects
-- **Progress Tracking**: Monitor the progress of your projects
+- **Progress Tracking**: Monitor the progress of your projects and tasks
+- **GitHub Integration**: Sync with GitHub repositories and manage pull requests
 
-## Technology Stack
+### Platform Features
+
+- **GitHub OAuth Authentication**: Secure login with GitHub accounts
+- **Responsive Design**: Modern, mobile-friendly interface
+- **Dark/Light Theme**: Customizable theme preferences
+- **Real-time Updates**: Live notifications and activity feeds
+- **RESTful API**: Well-structured backend API for all operations
+
+## 🛠️ Technology Stack
 
 ### Frontend
 
-- **React**: UI library for building the interface
-- **React Router**: For navigation
-- **Bootstrap & Custom CSS**: For styling
-- **Context API**: For state management
+- **React 18.3.1** - Modern UI library with hooks and context
+- **React Router DOM 7.0.1** - Client-side routing
+- **Bootstrap 5.3.3** - Responsive CSS framework
+- **Bootstrap Icons 1.12.1** - Icon library
+- **Framer Motion 11.12.0** - Animation library
+- **React Beautiful DnD 13.1.1** - Drag and drop functionality
+- **React Tinder Card 1.6.4** - Swipeable card components
+- **React Toastify 10.0.6** - Toast notifications
+- **Axios 1.7.8** - HTTP client for API calls
+- **Vite 6.0.1** - Fast build tool and dev server
 
-### Backend (Planned Implementation)
+### Backend
 
-- **Node.js**: Runtime environment
-- **Express**: Web framework
-- **MongoDB**: Database
-- **Mongoose**: ODM for MongoDB
-- **JWT**: For authentication
+- **Laravel 11.31** - PHP web framework
+- **Laravel Sanctum 4.0** - API authentication
+- **Laravel Socialite 5.16** - OAuth authentication
+- **PHP 8.2+** - Server-side language
+- **MySQL/PostgreSQL** - Database (configurable)
 
-## Project Structure
+### Development Tools
 
-The frontend is organized into the following structure:
+- **ESLint 9.15.0** - Code linting
+- **Vite** - Build tool and development server
+- **Composer** - PHP dependency management
+- **NPM** - Node.js package management
 
-```
-merge-mate/
-├── public/
-└── src/
-    ├── api/                # API calls
-    ├── components/         # Reusable components
-    ├── config/             # Configuration files
-    ├── context/            # Context providers
-    ├── pages/              # Page components
-    │   ├── add-project/    # Add project page
-    │   ├── contributors/   # Contributors page
-    │   ├── contributions/  # Contributions page
-    │   ├── dashboard/      # Dashboard pages
-    │   ├── discover/       # Discover projects page
-    │   ├── login/          # Authentication pages
-    │   ├── notifications/  # Notifications page
-    │   ├── profile/        # User profile page
-    │   ├── projects/       # Projects management
-    │   └── tasks/          # Task management
-    ├── styles/             # CSS styles
-    ├── utils/              # Utility functions
-    ├── App.jsx             # Main application component
-    └── main.jsx            # Application entry point
-```
-
-## Database Design
-
-For the MongoDB implementation, the following collections are recommended:
-
-### Users Collection
-
-```javascript
-{
-  _id: ObjectId,
-  githubId: String,       // ID from GitHub OAuth
-  username: String,
-  email: String,
-  displayName: String,
-  avatar: String,         // URL to profile image
-  bio: String,
-  skills: [String],       // Array of skills
-  role: String,           // 'contributor' or 'owner'
-  createdAt: Date,
-  updatedAt: Date
-}
-```
-
-### Projects Collection
-
-```javascript
-{
-  _id: ObjectId,
-  title: String,
-  description: String,
-  owner: ObjectId,        // Reference to User
-  status: String,         // 'In Progress', 'Completed', 'Planned'
-  techStack: [String],    // Array of technologies used
-  progress: Number,       // Percentage complete (0-100)
-  contributors: [         // Array of contributor references
-    {
-      user: ObjectId,     // Reference to User
-      role: String,       // Role in the project
-      joinedAt: Date
-    }
-  ],
-  stars: Number,          // Number of stars/likes
-  createdAt: Date,
-  updatedAt: Date
-}
-```
-
-### Tasks Collection
-
-```javascript
-{
-  _id: ObjectId,
-  title: String,
-  description: String,
-  project: ObjectId,      // Reference to Project
-  assignedTo: ObjectId,   // Reference to User
-  createdBy: ObjectId,    // Reference to User
-  status: String,         // 'todo', 'in-progress', 'completed'
-  priority: String,       // 'low', 'medium', 'high'
-  dueDate: Date,
-  techStack: String,      // Primary technology for the task
-  difficulty: String,     // 'beginner', 'intermediate', 'advanced'
-  createdAt: Date,
-  updatedAt: Date
-}
-```
-
-### Contributions Collection
-
-```javascript
-{
-  _id: ObjectId,
-  user: ObjectId,         // Reference to User
-  project: ObjectId,      // Reference to Project
-  task: ObjectId,         // Reference to Task
-  type: String,           // 'code', 'documentation', 'review', etc.
-  description: String,
-  pullRequestUrl: String, // GitHub PR URL
-  status: String,         // 'submitted', 'accepted', 'rejected'
-  createdAt: Date,
-  updatedAt: Date
-}
-```
-
-### Notifications Collection
-
-```javascript
-{
-  _id: ObjectId,
-  recipient: ObjectId,    // Reference to User
-  type: String,           // 'mention', 'review', 'task', etc.
-  content: String,
-  project: ObjectId,      // Reference to Project
-  read: Boolean,
-  createdAt: Date
-}
-```
-
-## API Endpoints
-
-The following API endpoints will be needed to support the frontend:
-
-### Authentication
-
-- `POST /api/auth/github` - Authenticate with GitHub
-- `GET /api/auth/github/callback` - GitHub OAuth callback
-- `POST /api/auth/logout` - Logout user
-- `GET /api/user` - Get authenticated user
-
-### Users
-
-- `GET /api/users/:id` - Get user profile
-- `PUT /api/users/:id` - Update user profile
-- `GET /api/users/:id/projects` - Get user's projects
-- `GET /api/users/:id/tasks` - Get user's tasks
-- `GET /api/users/:id/contributions` - Get user's contributions
-
-### Projects
-
-- `GET /api/projects` - Get all projects
-- `POST /api/projects` - Create a new project
-- `GET /api/projects/:id` - Get project details
-- `PUT /api/projects/:id` - Update project
-- `DELETE /api/projects/:id` - Delete project
-- `GET /api/projects/:id/tasks` - Get project tasks
-- `GET /api/projects/:id/contributors` - Get project contributors
-- `POST /api/projects/:id/contributors` - Add contributor to project
-
-### Tasks
-
-- `GET /api/tasks` - Get all tasks
-- `POST /api/tasks` - Create a new task
-- `GET /api/tasks/:id` - Get task details
-- `PUT /api/tasks/:id` - Update task
-- `DELETE /api/tasks/:id` - Delete task
-- `PUT /api/tasks/:id/status` - Update task status
-
-### Contributions
-
-- `GET /api/contributions` - Get all contributions
-- `POST /api/contributions` - Create a new contribution
-- `GET /api/contributions/:id` - Get contribution details
-- `PUT /api/contributions/:id` - Update contribution
-
-### Notifications
-
-- `GET /api/notifications` - Get user notifications
-- `PUT /api/notifications/:id` - Mark notification as read
-- `PUT /api/notifications/read-all` - Mark all notifications as read
-
-## Authentication
-
-MergeMate uses GitHub OAuth for authentication. The authentication flow is as follows:
-
-1. User clicks "Continue with GitHub" button
-2. User is redirected to GitHub OAuth page
-3. User authorizes the application
-4. GitHub redirects back to MergeMate with a code
-5. Backend exchanges code for access token
-6. Backend creates or updates user in database
-7. Backend returns user data and JWT token
-8. Frontend stores token and user data
-9. User is authenticated
-
-### Implementation Notes
-
-- Use passport.js with passport-github2 strategy
-- Implement JWT token generation and verification
-- Store GitHub access token securely to make API calls on behalf of the user
-
-## Installation
+## 📦 Installation
 
 ### Prerequisites
 
-- Node.js (v14 or later)
-- npm or yarn
-- MongoDB (v4 or later)
+- Node.js (v18.0.0 or later)
+- PHP (v8.2 or later)
+- Composer
+- MySQL/PostgreSQL database
+- Git
 
 ### Frontend Setup
 
 ```bash
 # Clone the repository
 git clone https://github.com/your-username/mergemate.git
-
-# Navigate to project directory
-cd mergemate
+cd mergemate/merge-mate
 
 # Install dependencies
 npm install
 
-# Create .env file with required environment variables
+# Create environment file
 cp .env.example .env
-# Edit .env file with your configuration
+
+# Configure environment variables
+# Edit .env file with your configuration:
+# VITE_GITHUB_CLIENT_ID=your_github_client_id
+# VITE_API_BASE_URL=http://localhost:8000/api/
+# VITE_FRONTEND_URL=http://localhost:5173
 
 # Start development server
 npm run dev
 ```
 
-### Backend Setup (After Implementation)
+### Backend Setup
 
 ```bash
 # Navigate to backend directory
-cd backend
+cd ../mergemate-Backend
 
-# Install dependencies
-npm install
+# Install PHP dependencies
+composer install
 
-# Create .env file with required environment variables
+# Create environment file
 cp .env.example .env
-# Edit .env file with your MongoDB connection string and other config
+
+# Generate application key
+php artisan key:generate
+
+# Configure database in .env file
+# DB_CONNECTION=mysql
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=mergemate
+# DB_USERNAME=your_username
+# DB_PASSWORD=your_password
+
+# Run database migrations
+php artisan migrate
 
 # Start development server
-npm run dev
+php artisan serve
 ```
 
-## Development
+### GitHub OAuth Setup
 
-### Frontend Development
+1. Go to GitHub Settings > Developer settings > OAuth Apps
+2. Create a new OAuth App with:
+   - **Application name**: MergeMate
+   - **Homepage URL**: `http://localhost:5173`
+   - **Authorization callback URL**: `http://localhost:5173/github/callback`
+3. Copy the Client ID and Client Secret
+4. Add them to your environment files
+
+## 🚀 Usage
+
+### Development
 
 ```bash
-# Start development server
-npm run dev
+# Frontend development
+npm run dev          # Start Vite dev server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
 
-# Build for production
+# Backend development
+php artisan serve    # Start Laravel dev server
+php artisan migrate  # Run database migrations
+php artisan test     # Run tests
+```
+
+### Production Deployment
+
+```bash
+# Frontend
 npm run build
+# Deploy the 'dist' folder to your hosting service
 
-# Preview production build
-npm run preview
+# Backend
+composer install --optimize-autoloader --no-dev
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
 ```
 
-### Backend Development (After Implementation)
+## 📋 Available Scripts
 
-```bash
-# Start development server
-npm run dev
+| Script            | Description                          |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | Start Vite development server        |
+| `npm run build`   | Build the application for production |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint`    | Run ESLint to check code quality     |
 
-# Run tests
-npm run test
+## 📚 API Endpoints
 
-# Start in debug mode
-npm run debug
+### Authentication
+
+- `GET /api/auth/github` - Redirect to GitHub OAuth
+- `GET /api/auth/github/callback` - Handle GitHub OAuth callback
+- `POST /api/logout` - Logout user
+
+### Profile Management
+
+- `GET /api/profile` - Get user profile
+- `PUT /api/profile` - Update user profile
+- `POST /api/profile/sync-github` - Sync with GitHub profile
+- `GET /api/profile/repositories` - Get user's GitHub repositories
+
+### Projects
+
+- `GET /api/projects` - Get all projects
+- `POST /api/projects` - Create a new project
+- `GET /api/projects/{id}` - Get project details
+- `PUT /api/projects/{id}` - Update project
+- `DELETE /api/projects/{id}` - Delete project
+- `GET /api/projects/recommended` - Get recommended projects
+
+### Tasks
+
+- `GET /api/tasks` - Get all tasks
+- `POST /api/tasks` - Create a new task
+- `GET /api/tasks/{id}` - Get task details
+- `PUT /api/tasks/{id}` - Update task
+- `DELETE /api/tasks/{id}` - Delete task
+- `POST /api/tasks/{id}/contribute` - Contribute to a task
+
+### Contributions
+
+- `GET /api/contributions` - Get all contributions
+- `POST /api/contributions` - Create a new contribution
+- `GET /api/contributions/{id}` - Get contribution details
+- `PUT /api/contributions/{id}` - Update contribution
+
+## 🏗️ Project Structure
+
+```
+mergemate/
+├── merge-mate/                 # Frontend (React)
+│   ├── public/                 # Static assets
+│   ├── src/
+│   │   ├── api/               # API service functions
+│   │   ├── components/        # Reusable React components
+│   │   ├── config/            # Configuration files
+│   │   ├── context/           # React Context providers
+│   │   ├── hooks/             # Custom React hooks
+│   │   ├── pages/             # Page components
+│   │   │   ├── dashboard/     # Dashboard pages
+│   │   │   ├── discover/      # Project discovery
+│   │   │   ├── tasks/         # Task management
+│   │   │   ├── projects/      # Project management
+│   │   │   ├── profile/       # User profile
+│   │   │   └── ...
+│   │   ├── styles/            # CSS stylesheets
+│   │   └── utils/             # Utility functions
+│   ├── package.json
+│   └── vite.config.js
+└── mergemate-Backend/          # Backend (Laravel)
+    ├── app/
+    │   ├── Http/Controllers/   # API controllers
+    │   ├── Models/            # Eloquent models
+    │   └── Providers/         # Service providers
+    ├── database/
+    │   ├── migrations/        # Database migrations
+    │   └── seeders/          # Database seeders
+    ├── routes/
+    │   └── api.php           # API routes
+    ├── composer.json
+    └── artisan
 ```
 
-## Deployment
+## 🔧 Dependencies
 
-### Deployment Options
+### Frontend Dependencies
 
-- **Frontend**: Vercel, Netlify, GitHub Pages
-- **Backend**: Heroku, DigitalOcean, AWS, Render
+- `@popperjs/core` - Tooltip and popover positioning
+- `axios` - HTTP client for API requests
+- `bootstrap` - CSS framework
+- `bootstrap-icons` - Icon library
+- `framer-motion` - Animation library
+- `react` - UI library
+- `react-beautiful-dnd` - Drag and drop
+- `react-dom` - React DOM rendering
+- `react-helmet-async` - Document head management
+- `react-router-dom` - Client-side routing
+- `react-tinder-card` - Swipeable cards
+- `react-toastify` - Toast notifications
 
-### Environment Variables
+### Frontend Dev Dependencies
 
-The following environment variables need to be set in production:
+- `@eslint/js` - ESLint JavaScript configuration
+- `@types/react` - TypeScript definitions for React
+- `@types/react-dom` - TypeScript definitions for React DOM
+- `@vitejs/plugin-react` - Vite React plugin
+- `eslint` - Code linting
+- `eslint-plugin-react` - React ESLint rules
+- `eslint-plugin-react-hooks` - React Hooks ESLint rules
+- `eslint-plugin-react-refresh` - React Refresh ESLint rules
+- `globals` - Global variables for ESLint
+- `vite` - Build tool
 
-#### Frontend
+### Backend Dependencies
 
-- `VITE_API_URL` - URL of the backend API
-- `VITE_GITHUB_CLIENT_ID` - GitHub OAuth client ID
+- `laravel/framework` - Laravel framework
+- `laravel/sanctum` - API authentication
+- `laravel/socialite` - OAuth authentication
+- `laravel/tinker` - REPL for Laravel
 
-#### Backend
+### Backend Dev Dependencies
 
-- `PORT` - Port to run the server on
-- `MONGODB_URI` - MongoDB connection string
-- `JWT_SECRET` - Secret for JWT signing
-- `GITHUB_CLIENT_ID` - GitHub OAuth client ID
-- `GITHUB_CLIENT_SECRET` - GitHub OAuth client secret
-- `GITHUB_CALLBACK_URL` - GitHub OAuth callback URL
+- `fakerphp/faker` - Fake data generator
+- `laravel/pail` - Log viewer
+- `laravel/pint` - Code style fixer
+- `laravel/sail` - Docker development environment
+- `mockery/mockery` - Mocking framework
+- `nunomaduro/collision` - Error handler
+- `phpunit/phpunit` - Testing framework
+
+## 🤝 Contributing
+
+We welcome contributions to MergeMate! Here's how you can help:
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Make your changes** and ensure they follow our coding standards
+4. **Run tests**: `npm run lint` (frontend) and `php artisan test` (backend)
+5. **Commit your changes**: `git commit -m 'Add amazing feature'`
+6. **Push to the branch**: `git push origin feature/amazing-feature`
+7. **Open a Pull Request**
+
+### Development Guidelines
+
+- Follow the existing code style and conventions
+- Write meaningful commit messages
+- Add tests for new features
+- Update documentation as needed
+- Ensure all tests pass before submitting
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Laravel** - For the excellent PHP framework
+- **React** - For the powerful UI library
+- **Bootstrap** - For the responsive CSS framework
+- **GitHub** - For OAuth integration and inspiration
+- **Open Source Community** - For the amazing tools and libraries
+
+## 📞 Contact
+
+For questions, suggestions, or support, please reach out to:
+
+- **Email**: [mujtaba.ahmed.232004@gmail.com](mailto:mujtaba.ahmed.232004@gmail.com)
+- **GitHub Issues**: [Create an issue](https://github.com/your-username/mergemate/issues)
 
 ---
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Contact
-
-For any questions or suggestions, please reach out to [mujtaba.ahmed.232004@gmail.com](mailto:mujtaba.ahmed.232004@gmail.com).
+**Made with ❤️ for the open source community**
